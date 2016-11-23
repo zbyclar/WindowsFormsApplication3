@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body, html, #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=jMFrWZuw5tzbTgLNWRg6qMQagZY2bzla"></script>
+    <title>地图展示</title>
+</head>
+<body>
+    <div id="allmap">
+    </div>    
+        <input style="visibility:hidden" id="allGpsContainer" >
+        <input style="visibility:hidden" id="pointedGpsContainer">
+        <input type="button" style="visibility:hidden" id="valueshot" onclick="getvalue()">
+        <input type="button" style="visibility:hidden" id="centreScreen" onclick="centreScreen()">
+</body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	var point = new BMap.Point(116.404, 39.915);
+	map.centerAndZoom(point, 15);
+	var gpsdata;
+	var gpselement;
+	var pointArray;
+    function getvalue()
+	{   
+        gpsdata = document.getElementById("allGpsContainer").getAttribute("value");
+        gpsdata = gpsdata.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\<|\>|\/|\?]/g, "");
+        gpselement = gpsdata.split(',');
+        pointArray = new Array();
+        //alert(gpselement.length); 
+        for (var i = 0; i < gpselement.length; i++) {
+            if (gpselement[2 * i] != null && gpselement[2 * i + 1] != null) {
+                var marker = new BMap.Marker(new BMap.Point(gpselement[2 * i] * 1, gpselement[2 * i + 1] * 1)); // 创建点
+                map.addOverlay(marker);    //增加点
+                pointArray[i] = new BMap.Point(gpselement[2 * i] * 1, gpselement[2 * i + 1] * 1);
+                marker.addEventListener("click", attribute);
+            }
+        }
+
+        //让所有点在视野范围内
+        map.setViewport(pointArray);
+        //获取覆盖物位置
+        function attribute(e) {
+            var p = e.target;
+            alert("marker的位置是" + p.getPosition().lng + "," + p.getPosition().lat);
+        }
+        // 百度地图API功能
+    }
+    function centreScreen()
+    {
+       
+        var pointedLocation = document.getElementById("pointedGpsContainer").getAttribute("value");
+        pointedLocation = pointedLocation.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\<|\>|\/|\?]/g, "");
+        var pointedElement = pointedLocation.split(',');
+        //alert(pointedLocation);
+        map.centerAndZoom(new BMap.Point(pointedElement[0], pointedElement[1]), 18);
+    }
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    	
+</script>
