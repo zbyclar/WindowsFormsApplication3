@@ -5,6 +5,9 @@ using Newtonsoft.Json.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.IO;
+using System.Security.Policy;
+using System.Threading;
 
 namespace WindowsFormsApplication3
 {
@@ -12,7 +15,10 @@ namespace WindowsFormsApplication3
     public partial class Form1 : Form
     {
         Socket sck;
+        Socket sckBrc;
         EndPoint epLocal, epRemote;
+
+        Thread listenerThread;
        
         public Form1()
         {
@@ -27,9 +33,32 @@ namespace WindowsFormsApplication3
             GlobalVariable.localIp = GetLocalIP();
             textBox1.Text = GetLocalIP();
             textBox2.Text = GetLocalIP();
-            
+
+            //make webrowser navigate to BaiduMap.html
+            DirectoryInfo dir = new DirectoryInfo(System.Windows.Forms.Application.StartupPath);
+            string str = dir.Parent.Parent.FullName.ToString();
+            str.Replace("\\", "/");
+            str = str + "\\BaiduMap.html";
+            Console.WriteLine(str);
+
+            //Open a new thread to listen to the Internet Broadcast
+
+            ThreadStart threadStart = new ThreadStart(bgdListen);
+            listenerThread = new Thread(threadStart);
+            listenerThread.Start();
+
+
         }
 
+        private void bgdListen()
+        {
+            
+            GetLocalIP();
+            UDPListener listener = new UDPListener();
+            listener.StartListener();
+            
+            
+        }
         
         private String GetLocalIP()
         {
@@ -91,7 +120,10 @@ namespace WindowsFormsApplication3
             t1.Nodes.Add(t3);
             t1.Nodes.Add(t4);
             Console.WriteLine(GlobalVariable.gpsAllLocation);
-            
+
+           
+
+
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -201,6 +233,18 @@ namespace WindowsFormsApplication3
 
         private void button4_Click_1(object sender, EventArgs e)
         {
+
+            //Send broadcast message through udp protocol, to indicate the specified ip address to communicate.
+
+            sckBrc = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            IPAddress broadcast = IPAddress.Parse("192.168.1.255");
+            byte[] sendbuf = Encoding.ASCII.GetBytes("192.168.1.60");
+            IPEndPoint ep = new IPEndPoint(broadcast, 11000);
+            sckBrc.SendTo(sendbuf, ep);
+            Console.WriteLine("Message sent to the broadcast address");
+            
+            //Set up connection between source ip and destination ip, need to be further amend.
+
             epLocal = new IPEndPoint(IPAddress.Parse(textBox1.Text), Convert.ToInt32(textBox3.Text));
             sck.Bind(epLocal);
             Console.WriteLine("bind local ip successfully !");
@@ -210,10 +254,39 @@ namespace WindowsFormsApplication3
 
             byte[] buffer = new byte[1500];
             sck.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
+
+            //change ui state
+
             button4.Enabled = false;
             button4.Text = "Connected";
             Submit.Enabled = true;
             textBox6.Focus();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //Initialize
+            OpenFileDialog fileDialog = new OpenFileDialog();
+
+            //Justify whether the user choose the file correctly
+            if(fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                //get the file name, which is the extension of the full path
+                string name = Path.GetFileName(fileDialog.FileName);
+
+                //Justify the file size, which should be smaller than 20K
+                FileInfo fileInfo = new FileInfo(fileDialog.FileName);
+                if(fileInfo.Length > 20480)
+                {
+                    MessageBox.Show("所选择的文件不能超过20K");
+                }
+                else
+                {
+                    //file upload logic here
+                    button3.Text = name;
+                }
+            }
+
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)
