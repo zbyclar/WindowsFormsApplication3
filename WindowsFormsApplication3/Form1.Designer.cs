@@ -57,10 +57,12 @@
             // button1
             // 
             this.button1.AutoSize = true;
-            this.button1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.button1.BackColor = System.Drawing.SystemColors.MenuText;
+            this.button1.Font = new System.Drawing.Font("SimHei", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
             this.button1.Location = new System.Drawing.Point(12, 446);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(159, 69);
+            this.button1.Size = new System.Drawing.Size(184, 69);
             this.button1.TabIndex = 2;
             this.button1.Text = "视频聊天";
             this.button1.UseVisualStyleBackColor = false;
@@ -69,7 +71,9 @@
             // button2
             // 
             this.button2.AutoSize = true;
-            this.button2.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.button2.BackColor = System.Drawing.SystemColors.MenuText;
+            this.button2.Font = new System.Drawing.Font("SimHei", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button2.Location = new System.Drawing.Point(177, 446);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(156, 69);
@@ -87,7 +91,7 @@
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(868, 925);
             this.webBrowser1.TabIndex = 4;
-            this.webBrowser1.Url = new System.Uri("c:/users/zbyclar/documents/visual studio 2015/Projects/WindowsFormsApplication3/W" +
+            this.webBrowser1.Url = new System.Uri("C:/Users/zbyclar/Documents/Visual Studio 2015/Projects/WindowsFormsApplication3/W" +
         "indowsFormsApplication3/BaiduMap.html", System.UriKind.Absolute);
             this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             // 
@@ -104,16 +108,20 @@
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.button3.Location = new System.Drawing.Point(339, 446);
+            this.button3.BackColor = System.Drawing.SystemColors.MenuText;
+            this.button3.Font = new System.Drawing.Font("SimHei", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button3.Location = new System.Drawing.Point(328, 446);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(150, 69);
+            this.button3.Size = new System.Drawing.Size(161, 69);
             this.button3.TabIndex = 6;
             this.button3.Text = "传输文件";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // textBox1
             // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox1.Location = new System.Drawing.Point(12, 667);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(103, 25);
@@ -122,6 +130,7 @@
             // 
             // textBox2
             // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox2.Location = new System.Drawing.Point(204, 667);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(118, 25);
@@ -130,6 +139,7 @@
             // 
             // textBox3
             // 
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox3.Location = new System.Drawing.Point(121, 667);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(77, 25);
@@ -137,6 +147,7 @@
             // 
             // textBox4
             // 
+            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox4.Location = new System.Drawing.Point(328, 668);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(77, 25);
@@ -144,6 +155,7 @@
             // 
             // textBox6
             // 
+            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox6.Location = new System.Drawing.Point(12, 912);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(393, 25);
@@ -152,6 +164,7 @@
             // 
             // Submit
             // 
+            this.Submit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Submit.Location = new System.Drawing.Point(412, 912);
             this.Submit.Name = "Submit";
             this.Submit.Size = new System.Drawing.Size(77, 25);
@@ -162,6 +175,7 @@
             // 
             // listBox1
             // 
+            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 15;
             this.listBox1.Location = new System.Drawing.Point(13, 699);
@@ -172,6 +186,7 @@
             // 
             // button4
             // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button4.Location = new System.Drawing.Point(412, 670);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
