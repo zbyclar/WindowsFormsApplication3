@@ -10,6 +10,7 @@ namespace WindowsFormsApplication3
     {
         public static string gpsAllLocation = "";
         public static string gpsPointedLocation;
+        public static string localIp;
 
     }
 }
