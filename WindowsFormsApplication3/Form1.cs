@@ -8,18 +8,21 @@ using System.Text;
 using System.IO;
 using System.Security.Policy;
 using System.Threading;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Security;
+using System.Net.NetworkInformation;
 
 namespace WindowsFormsApplication3
 {
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class Form1 : Form
     {
+        
+
         Socket sck;
-        Socket sckBrc;
         EndPoint epLocal, epRemote;
 
-        Thread listenerThread;
-       
         public Form1()
         {
 
@@ -31,8 +34,8 @@ namespace WindowsFormsApplication3
 
             //get local IP address, will be replaced by real-machine ip address in the future
             GlobalVariable.localIp = GetLocalIP();
-            textBox1.Text = GetLocalIP();
-            textBox2.Text = GetLocalIP();
+            textBox1.Text = GlobalVariable.localIp;
+            textBox2.Text = GlobalVariable.localIp;
 
             //make webrowser navigate to BaiduMap.html
             DirectoryInfo dir = new DirectoryInfo(System.Windows.Forms.Application.StartupPath);
@@ -40,35 +43,35 @@ namespace WindowsFormsApplication3
             str.Replace("\\", "/");
             str = str + "\\BaiduMap.html";
             Console.WriteLine(str);
-
+            
             //Open a new thread to listen to the Internet Broadcast
-
+            /*
             ThreadStart threadStart = new ThreadStart(bgdListen);
             listenerThread = new Thread(threadStart);
             listenerThread.Start();
-
+            */
 
         }
 
         private void bgdListen()
         {
-            
+
             GetLocalIP();
             UDPListener listener = new UDPListener();
             listener.StartListener();
-            
-            
+
+
         }
-        
+
         private String GetLocalIP()
         {
             IPHostEntry host;
             host = Dns.GetHostEntry(Dns.GetHostName());
+            Console.WriteLine("=======================" + Dns.GetHostName() + "===============================");
 
-
-            foreach(IPAddress ip in host.AddressList)
+            foreach (IPAddress ip in host.AddressList)
             {
-                if(ip.AddressFamily == AddressFamily.InterNetwork)
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
                 {
                     return ip.ToString();
                 }
@@ -77,7 +80,7 @@ namespace WindowsFormsApplication3
 
             return "127.0.0.1";
         }
-        
+
         private void MessageCallBack(IAsyncResult aResult)
         {
             try
@@ -100,7 +103,7 @@ namespace WindowsFormsApplication3
 
 
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 MessageBox.Show(exp.ToString());
             }
@@ -119,9 +122,29 @@ namespace WindowsFormsApplication3
             t1.Nodes.Add(t2);
             t1.Nodes.Add(t3);
             t1.Nodes.Add(t4);
+            
+            /*
+            foreach(string networkComputer in networkComputers)
+            {
+ 
+                IPHostEntry host = Dns.GetHostEntry(networkComputer);
+                foreach (IPAddress ip in host.AddressList)
+                {
+                    if (ip.AddressFamily == AddressFamily.InterNetwork)
+                    {
+                        String ipAddress = ip.ToString();
+                string str = "Host Name is: " + networkComputer + "\n" + "IP Address Is:" + ipAddress;
+                TreeNode i = new TreeNode(str);
+                t1.Nodes.Add(i);
+                    }
+
+                }
+                
+            }
+            */
             Console.WriteLine(GlobalVariable.gpsAllLocation);
 
-           
+
 
 
         }
@@ -133,7 +156,7 @@ namespace WindowsFormsApplication3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -141,9 +164,9 @@ namespace WindowsFormsApplication3
             if (webBrowser1.Document != null)
             {
                 int length = GlobalVariable.gpsAllLocation.Split('|').Length;
-               
-                String[] gpsTotalLocation = new String[2 * length];     
-                for(int i = 0; i < length; i++)
+
+                String[] gpsTotalLocation = new String[2 * length];
+                for (int i = 0; i < length; i++)
                 {
                     if (GlobalVariable.gpsAllLocation.Split('|')[i] != "")
                     {
@@ -167,7 +190,7 @@ namespace WindowsFormsApplication3
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -184,7 +207,7 @@ namespace WindowsFormsApplication3
 
                 }
             }
-            
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -196,11 +219,11 @@ namespace WindowsFormsApplication3
                 msg = enc.GetBytes(textBox6.Text);
 
                 sck.Send(msg);
-                listBox1.Items.Add("You: "+textBox6.Text);
+                listBox1.Items.Add("You: " + textBox6.Text);
                 textBox6.Clear();
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
@@ -235,14 +258,14 @@ namespace WindowsFormsApplication3
         {
 
             //Send broadcast message through udp protocol, to indicate the specified ip address to communicate.
-
+            /*
             sckBrc = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IPAddress broadcast = IPAddress.Parse("192.168.1.255");
             byte[] sendbuf = Encoding.ASCII.GetBytes("192.168.1.60");
-            IPEndPoint ep = new IPEndPoint(broadcast, 11000);
+            IPEndPoint ep = new IPEndPoint(broadcast, 11001);
             sckBrc.SendTo(sendbuf, ep);
             Console.WriteLine("Message sent to the broadcast address");
-            
+            */
             //Set up connection between source ip and destination ip, need to be further amend.
 
             epLocal = new IPEndPoint(IPAddress.Parse(textBox1.Text), Convert.ToInt32(textBox3.Text));
@@ -269,14 +292,14 @@ namespace WindowsFormsApplication3
             OpenFileDialog fileDialog = new OpenFileDialog();
 
             //Justify whether the user choose the file correctly
-            if(fileDialog.ShowDialog() == DialogResult.OK)
+            if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 //get the file name, which is the extension of the full path
                 string name = Path.GetFileName(fileDialog.FileName);
 
                 //Justify the file size, which should be smaller than 20K
                 FileInfo fileInfo = new FileInfo(fileDialog.FileName);
-                if(fileInfo.Length > 20480)
+                if (fileInfo.Length > 20480)
                 {
                     MessageBox.Show("所选择的文件不能超过20K");
                 }
@@ -293,5 +316,9 @@ namespace WindowsFormsApplication3
         {
 
         }
+        
+       
+
+
     }
 }
