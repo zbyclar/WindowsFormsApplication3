@@ -11,12 +11,13 @@ namespace WindowsFormsApplication3
     public class UDPListener
     {
         private const int listenPort = 11000;
+        private UdpClient listener;
 
         public void StartListener()
         {
             bool done = false;
 
-            UdpClient listener = new UdpClient(listenPort);
+            listener = new UdpClient(listenPort);
             IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
 
             try
@@ -33,6 +34,11 @@ namespace WindowsFormsApplication3
                 Console.WriteLine(e.ToString());
             }
 
+        }
+
+        public void CloseListener()
+        {
+            listener.Close();
         }
     }
 }
