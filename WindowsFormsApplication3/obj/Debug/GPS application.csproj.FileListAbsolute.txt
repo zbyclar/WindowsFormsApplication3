@@ -10,3 +10,7 @@ c:\users\zbyclar\documents\visual studio 2015\Projects\WindowsFormsApplication3\
 c:\users\zbyclar\documents\visual studio 2015\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\GPS application.csproj.GenerateResource.Cache
 c:\users\zbyclar\documents\visual studio 2015\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.exe
 c:\users\zbyclar\documents\visual studio 2015\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.pdb
+C:\Users\zbyclar\Documents\Visual Studio 2015\Projects\WindowsFormsApplication3\WindowsFormsApplication3\bin\Debug\Microsoft.DirectX.DirectSound.dll
+C:\Users\zbyclar\Documents\Visual Studio 2015\Projects\WindowsFormsApplication3\WindowsFormsApplication3\bin\Debug\Microsoft.DirectX.dll
+C:\Users\zbyclar\Documents\Visual Studio 2015\Projects\WindowsFormsApplication3\WindowsFormsApplication3\bin\Debug\Microsoft.DirectX.xml
+C:\Users\zbyclar\Documents\Visual Studio 2015\Projects\WindowsFormsApplication3\WindowsFormsApplication3\bin\Debug\Microsoft.DirectX.DirectSound.xml
