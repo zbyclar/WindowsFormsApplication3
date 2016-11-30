@@ -20,17 +20,23 @@ namespace WindowsFormsApplication3
     {
         
 
-        Socket sck;
+        Socket sck,sckVoice;
+        soundCapture sc;
         EndPoint epLocal, epRemote;
-
+        EndPoint epVoiceLocal, epVoiceRemote;
+        soundCapture vc = new soundCapture();
         public Form1()
         {
 
             InitializeComponent();
-
-            //Set up IP connection between epLocal and epRemote
+            CheckForIllegalCrossThreadCalls = false;
+            
+            //set text socket and voice socket
             sck = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             sck.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+
+            sckVoice = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            sckVoice.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
 
             //get local IP address, will be replaced by real-machine ip address in the future
             GlobalVariable.localIp = GetLocalIP();
@@ -94,13 +100,11 @@ namespace WindowsFormsApplication3
                     receivedData = (byte[])aResult.AsyncState;
                     ASCIIEncoding eEncoding = new ASCIIEncoding();
                     string receivedMessage = eEncoding.GetString(receivedData);
-
                     listBox1.Items.Add("Friends: " + receivedMessage);
                 }
 
                 byte[] buffer = new byte[1500];
                 sck.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
-
 
             }
             catch (Exception exp)
@@ -123,25 +127,7 @@ namespace WindowsFormsApplication3
             t1.Nodes.Add(t3);
             t1.Nodes.Add(t4);
             
-            /*
-            foreach(string networkComputer in networkComputers)
-            {
- 
-                IPHostEntry host = Dns.GetHostEntry(networkComputer);
-                foreach (IPAddress ip in host.AddressList)
-                {
-                    if (ip.AddressFamily == AddressFamily.InterNetwork)
-                    {
-                        String ipAddress = ip.ToString();
-                string str = "Host Name is: " + networkComputer + "\n" + "IP Address Is:" + ipAddress;
-                TreeNode i = new TreeNode(str);
-                t1.Nodes.Add(i);
-                    }
-
-                }
-                
-            }
-            */
+            
             Console.WriteLine(GlobalVariable.gpsAllLocation);
 
 
@@ -156,7 +142,7 @@ namespace WindowsFormsApplication3
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            vc.stoprec();
         }
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -268,16 +254,21 @@ namespace WindowsFormsApplication3
             */
             //Set up connection between source ip and destination ip, need to be further amend.
 
-            epLocal = new IPEndPoint(IPAddress.Parse(textBox1.Text), Convert.ToInt32(textBox3.Text));
+            epLocal = new IPEndPoint(IPAddress.Parse(textBox1.Text), Convert.ToInt32("80"));
+        
             sck.Bind(epLocal);
-            Console.WriteLine("bind local ip successfully !");
+        
+            Console.WriteLine("bind local ip successfully...");
 
-            epRemote = new IPEndPoint(IPAddress.Parse(textBox2.Text), Convert.ToInt32(textBox4.Text));
+            epRemote = new IPEndPoint(IPAddress.Parse(textBox2.Text), Convert.ToInt32("80"));
+            
             sck.Connect(epRemote);
-
+            Console.WriteLine("connect remote ip successfully...");
             byte[] buffer = new byte[1500];
             sck.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
-
+            Thread voCon = new Thread(VoiceChat);
+            voCon.IsBackground = true;
+            voCon.Start();
             //change ui state
 
             button4.Enabled = false;
@@ -307,9 +298,29 @@ namespace WindowsFormsApplication3
                 {
                     //file upload logic here
                     button3.Text = name;
+
                 }
             }
+           
+        }
 
+        private void listenFile()
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                vc.StartRecord("C:\\Users\\zbyclar\\Desktop\\test1.wav");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            //C:\\Users\\zbyclar\\Desktop\\test1.wav
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)
@@ -317,8 +328,60 @@ namespace WindowsFormsApplication3
 
         }
         
-       
+        private void StartReceiveFile()
+        {
+            //port is 2005 for file transferring
+            IPEndPoint epReceiver = new IPEndPoint(IPAddress.Parse(textBox1.Text), int.Parse("2005"));
+            IPEndPoint epSender = new IPEndPoint(IPAddress.Parse(textBox2.Text), int.Parse("2005"));
 
+            Socket fileTrans = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
+            fileTrans.Bind(epReceiver);
+            fileTrans.Connect(epSender);
+            fileTrans.Listen(10);
+        }
+
+        private void VoiceChat()
+        {
+            epVoiceLocal = new IPEndPoint(IPAddress.Parse(textBox1.Text), Convert.ToInt32("90"));
+            epVoiceRemote = new IPEndPoint(IPAddress.Parse(textBox2.Text), Convert.ToInt32("90"));
+            sckVoice.Bind(epVoiceLocal);
+            sckVoice.Connect(epVoiceRemote);
+            vc.sckSetter(sckVoice);
+            vc.intPtr = this.Handle;
+            vc.CreatePalyDevice();
+            vc.CreateSecondaryBuffer();
+            byte[] bytData = new byte[999999];
+            while (true)
+            {
+                Console.WriteLine("Keep Listening to port 90...");
+                if (sckVoice.Poll(5000, SelectMode.SelectRead))
+                {
+                    sckVoice.BeginReceiveFrom(bytData, 0, bytData.Length, SocketFlags.None, ref epVoiceRemote, new AsyncCallback(ReceiveData), null);
+                    
+                }
+            }
+
+        }
+
+        private void ReceiveData(IAsyncResult iar)
+        {
+            int intRecv = 0;
+            try
+            {
+                intRecv = sckVoice.EndReceiveFrom(iar, ref epVoiceRemote);
+            }
+            catch
+            {
+                throw new Exception();
+            }
+            if(intRecv > 0)
+            {
+                byte[] bytReceivedData = new byte[intRecv];
+                Buffer.BlockCopy(bytReceivedData, 0, bytReceivedData, 0, intRecv);
+                vc.getVoiceData(intRecv, bytReceivedData);
+            }
+        }
+        
     }
 }
