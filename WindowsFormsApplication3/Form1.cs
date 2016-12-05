@@ -37,6 +37,8 @@ namespace WindowsFormsApplication3
             sckVoice = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             sckVoice.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
 
+            sckFile = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            sckFile.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
             //get local IP address, will be replaced by real-machine ip address in the future
             GlobalVariable.localIp = GetLocalIP();
             textBox1.Text = GlobalVariable.localIp;
@@ -278,29 +280,36 @@ namespace WindowsFormsApplication3
             epFileRemote = new IPEndPoint(IPAddress.Parse(textBox2.Text), Convert.ToInt32("100"));
             sckFile.Bind(epFileLocal);
             sckFile.Connect(epFileRemote);
-            sckFile.Listen(10);
-            string sendFileName = System.Text.Encoding.Unicode.GetString(ReceiveVarData(sckFile));
-            string bagSize = System.Text.Encoding.Unicode.GetString(ReceiveVarData(sckFile));
-            int bagCount = int.Parse(System.Text.Encoding.Unicode.GetString(ReceiveVarData(sckFile)));
-            string bagLast = System.Text.Encoding.Unicode.GetString(ReceiveVarData(sckFile));
-            FileStream myFile = new FileStream(sendFileName, FileMode.Create, FileAccess.Write);
-            int sendedCount = 0;
             while (true)
             {
-                byte[] data = ReceiveVarData(sckFile);
-                if (data.Length == 0)
-                    break;
-                else
-                {
-                    sendedCount++;
-                    myFile.Write(data, 0, data.Length);
-                    Console.Write("keep writing data into the file!");
-                }
+                Console.WriteLine("Keep listening to port 100");
+                if (sckFile.Poll(5000, SelectMode.SelectRead))
+                { 
 
+                    string sendFileName = System.Text.Encoding.Unicode.GetString(ReceiveVarData(sckFile));
+                    string bagSize = System.Text.Encoding.Unicode.GetString(ReceiveVarData(sckFile));
+                    int bagCount = int.Parse(System.Text.Encoding.Unicode.GetString(ReceiveVarData(sckFile)));
+                    string bagLast = System.Text.Encoding.Unicode.GetString(ReceiveVarData(sckFile));
+                    FileStream myFile = new FileStream(sendFileName, FileMode.Create, FileAccess.Write);
+                    int sendedCount = 0;
+                    while (true)
+                    {
+                        byte[] data = ReceiveVarData(sckFile);
+                        if (data.Length == 0)
+                            break;
+                        else
+                        {
+                            sendedCount++;
+                            myFile.Write(data, 0, data.Length);
+                            Console.Write("keep writing data into the file!");
+                        }
+
+                    }
+                    //byte[] fileRecv = new byte[4194304];
+                    myFile.Close();
+                    MessageBox.Show("文件接收完毕!");
+                }
             }
-            //byte[] fileRecv = new byte[4194304];
-            myFile.Close();
-            MessageBox.Show("文件接收完毕!");
         }
 
         /*

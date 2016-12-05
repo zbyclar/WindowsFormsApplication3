@@ -34,7 +34,6 @@ namespace WindowsFormsApplication3
         public BufferDescription buffDiscript = null;
         public SecondaryBuffer secBuffer;
         public MemoryStream memstream = null;
-
         public IntPtr Intprt
         {
             set
