@@ -14,7 +14,7 @@ namespace WindowsFormsApplication3
 {
     public class soundCapture
     {
-        //public string strRecSaveFile = string.Empty;
+        
         private Notify myNotify = null;
         public FileStream fsWav = null;
         public  const int iNotifyNum = 16;
