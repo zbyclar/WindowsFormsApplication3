@@ -14,7 +14,7 @@ namespace WindowsFormsApplication3
 {
     public class soundCapture
     {
-        //public string strRecSaveFile = string.Empty;
+        
         private Notify myNotify = null;
         public FileStream fsWav = null;
         public  const int iNotifyNum = 16;
@@ -34,7 +34,6 @@ namespace WindowsFormsApplication3
         public BufferDescription buffDiscript = null;
         public SecondaryBuffer secBuffer;
         public MemoryStream memstream = null;
-
         public IntPtr Intprt
         {
             set
@@ -71,7 +70,7 @@ namespace WindowsFormsApplication3
             buffDiscript.GlobalFocus = true;
             secBuffer = new SecondaryBuffer(buffDiscript, playDev);
             byte[] bytMemory = new byte[100000];
-            memstream = new MemoryStream(bytMemory, 0, 100000, true, true);
+            memstream = new MemoryStream(bytMemory, 0, 10000, true, true);
             Console.WriteLine("Create a secondarybuffer successfully...");
         }
         
@@ -248,33 +247,34 @@ namespace WindowsFormsApplication3
             return format;
         }
         
+        private int intPosWrite = 0, intPosPlay = 0, intNotifySize = 5000;
         //following use for client receiving
         public void getVoiceData(int intRecv, byte[] bytRecv)
         {
-            int intPosWrite = 0, intPosPlay = 0, intNotifySize = 5000;
-
-
-            SecondaryBuffer sec = new SecondaryBuffer(buffDiscript, playDev);
+            
             if (intPosWrite + intRecv <= memstream.Capacity)
             {
                 if ((intPosWrite - intPosPlay >= 0 && intPosWrite - intPosPlay < intNotifySize) || (intPosWrite - intPosPlay < 0 && intPosWrite - intPosPlay + memstream.Capacity < intNotifySize))
                 {
-                    memstream.Write(bytRecv, 0, intRecv);
-                    intPosWrite += intRecv;
+                        memstream.Write(bytRecv, 0, intRecv);
+                        intPosWrite += intRecv;                   
                 }
                 else if (intPosWrite - intPosPlay >= 0)
                 {
                     buffDiscript.BufferBytes = intPosWrite - intPosPlay;
-                    sec = new SecondaryBuffer(buffDiscript, playDev);
+                    SecondaryBuffer sec = new SecondaryBuffer(buffDiscript, playDev);
                     memstream.Position = intPosPlay;
+                    sec.Write(0, memstream, intPosWrite - intPosPlay, LockFlag.FromWriteCursor);
                     sec.Play(0, BufferPlayFlags.Default);
                     memstream.Position = intPosWrite;
                     intPosPlay = intPosWrite;
                 }
                 else if (intPosWrite - intPosPlay < 0)
                 {
+                    
                     buffDiscript.BufferBytes = intPosWrite - intPosPlay + memstream.Capacity;
-                    sec = new SecondaryBuffer(buffDiscript, playDev);
+                    SecondaryBuffer sec = new SecondaryBuffer(buffDiscript, playDev);
+                    memstream.Position = intPosPlay;
                     sec.Write(0, memstream, memstream.Capacity - intPosPlay, LockFlag.FromWriteCursor);
                     memstream.Position = 0;
                     sec.Write(memstream.Capacity - intPosPlay, memstream, intPosWrite, LockFlag.FromWriteCursor);
@@ -287,7 +287,6 @@ namespace WindowsFormsApplication3
             {
                 int irest = memstream.Capacity - intPosWrite;
                 memstream.Write(bytRecv, 0, irest);
-                memstream.Write(bytRecv, 0, irest);
                 memstream.Position = 0;
                 memstream.Write(bytRecv, irest, intRecv - irest);
                 intPosWrite = intRecv - irest;
@@ -299,13 +298,12 @@ namespace WindowsFormsApplication3
             DevicesCollection dc = new DevicesCollection();
             Guid g;
             if (dc.Count > 0)
-            {
                 g = dc[0].DriverGuid;
-            }
             else
                 return false;
             playDev = new Device(g);
             playDev.SetCooperativeLevel(intPtr, CooperativeLevel.Normal);
+            Console.WriteLine("The play device is ------------------------------------------" + playDev.ToString());
             return true;
         }
 

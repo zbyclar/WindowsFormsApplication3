@@ -12,31 +12,45 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Net.NetworkInformation;
+using Oraycn.MPlayer;
+using Oraycn.MCapture;
+using System.Drawing;
 
 namespace WindowsFormsApplication3
 {
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class Form1 : Form
     {
-        
-
-        Socket sck,sckVoice;
-        soundCapture sc;
+        Socket sckText,sckVoice,sckFile,sckVideo;
+        //soundCapture sc;
         EndPoint epLocal, epRemote;
         EndPoint epVoiceLocal, epVoiceRemote;
+        EndPoint epFileLocal, epFileRemote;
+        EndPoint epVideoLocal, epVideoRemote;
         soundCapture vc = new soundCapture();
+        private IAudioPlayer audioPlayer;
+        private IMicrophoneCapturer microphoneCapturer;
+        private ICameraCapturer cameraCapturer;
+        bool flag = true;
+
         public Form1()
         {
-
+            
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
-            
+
             //set text socket and voice socket
-            sck = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-            sck.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+            sckText = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            sckText.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
 
             sckVoice = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             sckVoice.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+
+            sckVideo = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            sckVideo.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+            
+            sckFile = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            sckFile.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
 
             //get local IP address, will be replaced by real-machine ip address in the future
             GlobalVariable.localIp = GetLocalIP();
@@ -50,68 +64,8 @@ namespace WindowsFormsApplication3
             str = str + "\\BaiduMap.html";
             Console.WriteLine(str);
             
-            //Open a new thread to listen to the Internet Broadcast
-            /*
-            ThreadStart threadStart = new ThreadStart(bgdListen);
-            listenerThread = new Thread(threadStart);
-            listenerThread.Start();
-            */
-
         }
 
-        private void bgdListen()
-        {
-
-            GetLocalIP();
-            UDPListener listener = new UDPListener();
-            listener.StartListener();
-
-
-        }
-
-        private String GetLocalIP()
-        {
-            IPHostEntry host;
-            host = Dns.GetHostEntry(Dns.GetHostName());
-            Console.WriteLine("=======================" + Dns.GetHostName() + "===============================");
-
-            foreach (IPAddress ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return ip.ToString();
-                }
-
-            }
-
-            return "127.0.0.1";
-        }
-
-        private void MessageCallBack(IAsyncResult aResult)
-        {
-            try
-            {
-                int size = sck.EndReceiveFrom(aResult, ref epRemote);
-
-                //there must be an epRemote to get message from
-                if (size > 0)
-                {
-                    byte[] receivedData = new byte[1464];
-                    receivedData = (byte[])aResult.AsyncState;
-                    ASCIIEncoding eEncoding = new ASCIIEncoding();
-                    string receivedMessage = eEncoding.GetString(receivedData);
-                    listBox1.Items.Add("Friends: " + receivedMessage);
-                }
-
-                byte[] buffer = new byte[1500];
-                sck.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
-
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show(exp.ToString());
-            }
-        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -142,7 +96,17 @@ namespace WindowsFormsApplication3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            vc.stoprec();
+            //capture image from camera device
+            this.cameraCapturer = CapturerFactory.CreateCameraCapturer(0, new Size(int.Parse("320"), int.Parse("240")), 20);
+            this.cameraCapturer.ImageCaptured += new ESBasic.CbGeneric<Bitmap>(ImageCaptured);
+            this.cameraCapturer.Start();
+
+            //At the same time, capture voice from microphone device
+            this.microphoneCapturer = CapturerFactory.CreateMicrophoneCapturer(int.Parse("0"));
+            this.microphoneCapturer.AudioCaptured += new ESBasic.CbGeneric<byte[]>(microphoneCapturer_AudioCaptured);
+            this.microphoneCapturer.Start();
+
+            flag = false;
         }
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -204,7 +168,7 @@ namespace WindowsFormsApplication3
                 byte[] msg = new byte[1500];
                 msg = enc.GetBytes(textBox6.Text);
 
-                sck.Send(msg);
+                sckText.Send(msg);
                 listBox1.Items.Add("You: " + textBox6.Text);
                 textBox6.Clear();
 
@@ -243,34 +207,29 @@ namespace WindowsFormsApplication3
         private void button4_Click_1(object sender, EventArgs e)
         {
 
-            //Send broadcast message through udp protocol, to indicate the specified ip address to communicate.
-            /*
-            sckBrc = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-            IPAddress broadcast = IPAddress.Parse("192.168.1.255");
-            byte[] sendbuf = Encoding.ASCII.GetBytes("192.168.1.60");
-            IPEndPoint ep = new IPEndPoint(broadcast, 11001);
-            sckBrc.SendTo(sendbuf, ep);
-            Console.WriteLine("Message sent to the broadcast address");
-            */
-            //Set up connection between source ip and destination ip, need to be further amend.
 
             epLocal = new IPEndPoint(IPAddress.Parse(textBox1.Text), Convert.ToInt32("80"));
         
-            sck.Bind(epLocal);
+            sckText.Bind(epLocal);
         
             Console.WriteLine("bind local ip successfully...");
 
             epRemote = new IPEndPoint(IPAddress.Parse(textBox2.Text), Convert.ToInt32("80"));
             
-            sck.Connect(epRemote);
+            sckText.Connect(epRemote);
             Console.WriteLine("connect remote ip successfully...");
             byte[] buffer = new byte[1500];
-            sck.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
+            sckText.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
             Thread voCon = new Thread(VoiceChat);
             voCon.IsBackground = true;
             voCon.Start();
+            Thread viCon = new Thread(VideoChat);
+            viCon.IsBackground = true;
+            viCon.Start();
             //change ui state
-
+            Thread fileTrans = new Thread(listenFile);
+            fileTrans.IsBackground = true;
+            fileTrans.Start();
             button4.Enabled = false;
             button4.Text = "Connected";
             Submit.Enabled = true;
@@ -290,55 +249,106 @@ namespace WindowsFormsApplication3
 
                 //Justify the file size, which should be smaller than 20K
                 FileInfo fileInfo = new FileInfo(fileDialog.FileName);
-                if (fileInfo.Length > 20480)
+                FileStream file = fileInfo.OpenRead();
+                if (fileInfo.Length > 4194304)
                 {
-                    MessageBox.Show("所选择的文件不能超过20K");
+                    MessageBox.Show("所选择的文件不能超过4M");
                 }
                 else
                 {
                     //file upload logic here
                     button3.Text = name;
+                    StartSendFile(file);
 
                 }
             }
            
         }
 
-        private void listenFile()
-        {
-
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
             try
             {
-                vc.StartRecord("C:\\Users\\zbyclar\\Desktop\\test1.wav");
+                //vc.StartRecord("C:\\Users\\zbyclar\\Desktop\\test1.wav");
+                this.microphoneCapturer = CapturerFactory.CreateMicrophoneCapturer(int.Parse("0"));
+                this.microphoneCapturer.Start();
+                this.microphoneCapturer.AudioCaptured += new ESBasic.CbGeneric<byte[]>(microphoneCapturer_AudioCaptured);
+                flag = false;
             }
             catch(Exception ex)
             {
                 Console.WriteLine(ex);
             }
 
-            //C:\\Users\\zbyclar\\Desktop\\test1.wav
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
         }
-        
-        private void StartReceiveFile()
+
+        private void listenFile()
         {
-            //port is 2005 for file transferring
-            IPEndPoint epReceiver = new IPEndPoint(IPAddress.Parse(textBox1.Text), int.Parse("2005"));
-            IPEndPoint epSender = new IPEndPoint(IPAddress.Parse(textBox2.Text), int.Parse("2005"));
+            epFileLocal = new IPEndPoint(IPAddress.Parse(textBox1.Text), Convert.ToInt32("100"));
+            epFileRemote = new IPEndPoint(IPAddress.Parse(textBox2.Text), Convert.ToInt32("100"));
+            sckFile.Bind(epFileLocal);
+            sckFile.Connect(epFileRemote);
+            while (true)
+            {
+                
+                if (sckFile.Poll(5000, SelectMode.SelectRead))
+                { 
 
-            Socket fileTrans = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                    string sendFileName = System.Text.Encoding.Unicode.GetString(ReceiveVarData(sckFile));
+                    string bagSize = System.Text.Encoding.Unicode.GetString(ReceiveVarData(sckFile));
+                    int bagCount = int.Parse(System.Text.Encoding.Unicode.GetString(ReceiveVarData(sckFile)));
+                    string bagLast = System.Text.Encoding.Unicode.GetString(ReceiveVarData(sckFile));
+                    FileStream myFile = new FileStream(sendFileName, FileMode.Create, FileAccess.Write);
+                    int sendedCount = 0;
+                    while (true)
+                    {
+                        byte[] data = ReceiveVarData(sckFile);
+                        if (data.Length == 0)
+                            break;
+                        else
+                        {
+                            sendedCount++;
+                            myFile.Write(data, 0, data.Length);
+                            Console.Write("keep writing data into the file!");
+                        }
 
-            fileTrans.Bind(epReceiver);
-            fileTrans.Connect(epSender);
-            fileTrans.Listen(10);
+                    }
+                    //byte[] fileRecv = new byte[4194304];
+                    myFile.Close();
+                    MessageBox.Show("文件接收完毕!");
+                }
+            }
+        }
+
+        /*
+        private void ReceiveFile(IAsyncResult iar)
+        {
+            int recSize = sckFile.EndReceiveFrom(iar, ref epFileRemote);
+            if (recSize > 0)
+            {
+                byte[] receivedByte = new byte[4194304];
+                receivedByte = (byte[])iar.AsyncState;
+            }
+        }
+        */
+        private void microphoneCapturer_AudioCaptured(byte[] audioData)
+        {
+            sckVoice.Send(audioData);
+            //Console.WriteLine("Keep sending voice data");
+        }
+
+        private void ImageCaptured(Bitmap img)
+        {
+            byte[] imgByt = bitmapToByte(img);
+            Console.WriteLine(imgByt.Length);
+            sckVideo.SendTo(imgByt,epVideoRemote);
+            Console.WriteLine("Keep sending image data");
         }
 
         private void VoiceChat()
@@ -347,21 +357,124 @@ namespace WindowsFormsApplication3
             epVoiceRemote = new IPEndPoint(IPAddress.Parse(textBox2.Text), Convert.ToInt32("90"));
             sckVoice.Bind(epVoiceLocal);
             sckVoice.Connect(epVoiceRemote);
+            /*
             vc.sckSetter(sckVoice);
             vc.intPtr = this.Handle;
             vc.CreatePalyDevice();
             vc.CreateSecondaryBuffer();
+            */
+            this.audioPlayer = PlayerFactory.CreateAudioPlayer(int.Parse("0"), 16000, 1, 16, 2);
             byte[] bytData = new byte[999999];
             while (true)
             {
-                Console.WriteLine("Keep Listening to port 90...");
+                
                 if (sckVoice.Poll(5000, SelectMode.SelectRead))
                 {
+                    if (flag == true)
+                    {
+                        //vc.StartRecord("C:\\Users\\zbyclar\\Desktop\\test2.wav");
+                        this.microphoneCapturer = CapturerFactory.CreateMicrophoneCapturer(int.Parse("0"));
+                        this.microphoneCapturer.Start();
+                        this.microphoneCapturer.AudioCaptured += new ESBasic.CbGeneric<byte[]>(microphoneCapturer_AudioCaptured);
+                        flag = false;
+                    }
+                    //Console.WriteLine("There are voices !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                     sckVoice.BeginReceiveFrom(bytData, 0, bytData.Length, SocketFlags.None, ref epVoiceRemote, new AsyncCallback(ReceiveData), null);
                     
                 }
             }
 
+        }
+
+        private void VideoChat()
+        {
+            epVideoLocal = new IPEndPoint(IPAddress.Parse(textBox1.Text), Convert.ToInt32("110"));
+            epVideoRemote = new IPEndPoint(IPAddress.Parse(textBox2.Text), Convert.ToInt32("110"));
+            sckVideo.Bind(epVideoLocal);
+            sckVideo.Connect(epVideoRemote);
+            
+           
+            while (true)
+            {
+                
+                if (sckVideo.Poll(5000, SelectMode.SelectRead))
+                {
+                    if (flag == true)
+                    {
+                        //capture image from camera device
+                        this.cameraCapturer = CapturerFactory.CreateCameraCapturer(0, new Size(int.Parse("320"), int.Parse("240")), 20);
+                        this.cameraCapturer.ImageCaptured += new ESBasic.CbGeneric<Bitmap>(ImageCaptured);
+                        this.cameraCapturer.Start();
+
+                        //At the same time, capture voice from microphone device
+                        this.microphoneCapturer = CapturerFactory.CreateMicrophoneCapturer(int.Parse("0"));
+                        this.microphoneCapturer.AudioCaptured += new ESBasic.CbGeneric<byte[]>(microphoneCapturer_AudioCaptured);
+                        this.microphoneCapturer.Start();
+
+                        flag = false;
+                    }
+                    Console.WriteLine("There are both images and voice !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    
+                    MemoryStream ms = new MemoryStream();
+                    int size = 0;
+
+                    while(size< 230454)
+                    {
+                        byte[] img = new byte[230454];
+                        int r = sckVideo.Receive(img, img.Length, SocketFlags.None);
+                        size = size + r;
+                        Console.WriteLine("This time, there are " + r + " datagrams" +"\n"+"And in total "+size+" have been received");
+                        ms.Write(img, 0, r);
+                    }
+                    if(size == 230454)
+                        Form1_ImageCaptured(StreamToBitmap(ms));
+                    
+                }
+            }
+
+        }
+        /*
+        private void ReceiveImage(IAsyncResult iar)
+        {
+            int intRecv = 0;
+            try
+            {
+                intRecv = sckVideo.EndReceiveFrom(iar, ref epVideoRemote);
+            }
+            catch
+            {
+                throw new Exception();
+            }
+            if(intRecv > 0)
+            {
+                byte[] byteReceivedImage = new byte[intRecv];
+                Bitmap imageBitmap = byteToBitmap(byteReceivedImage);
+                Form1_ImageCaptured(imageBitmap);
+            }
+        }
+        */
+        private void Form1_ImageCaptured(Bitmap img)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new ESBasic.CbGeneric<Bitmap>(this.Form1_ImageCaptured), img);
+            }
+            else
+            {
+
+
+                Bitmap old = (Bitmap)this.panel3.BackgroundImage;
+                this.panel3.Dispose();
+                this.panel3 = new System.Windows.Forms.PictureBox();
+                this.panel3.BackgroundImage = img;
+                if (old != null)
+                {
+                    //立即释放不再使用的视频帧
+                    
+                    old.Dispose();
+                      
+                }
+            }
         }
 
         private void ReceiveData(IAsyncResult iar)
@@ -378,10 +491,141 @@ namespace WindowsFormsApplication3
             if(intRecv > 0)
             {
                 byte[] bytReceivedData = new byte[intRecv];
-                Buffer.BlockCopy(bytReceivedData, 0, bytReceivedData, 0, intRecv);
-                vc.getVoiceData(intRecv, bytReceivedData);
+                //Buffer.BlockCopy(bytReceivedData, 0, bytReceivedData, 0, intRecv);
+                //vc.getVoiceData(intRecv, bytReceivedData
+
+                //Console.WriteLine("There are voices !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                this.audioPlayer.Play(bytReceivedData);
             }
         }
-        
+
+        private void bgdListen()
+        {
+
+            GetLocalIP();
+            UDPListener listener = new UDPListener();
+            listener.StartListener();
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            sckVideo.Disconnect(true);
+        }
+
+        private String GetLocalIP()
+        {
+            IPHostEntry host;
+            host = Dns.GetHostEntry(Dns.GetHostName());
+            Console.WriteLine("=======================" + Dns.GetHostName() + "===============================");
+
+            foreach (IPAddress ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+
+            return "127.0.0.1";
+        }
+
+        private void MessageCallBack(IAsyncResult aResult)
+        {
+            try
+            {
+                int size = sckText.EndReceiveFrom(aResult, ref epRemote);
+
+                //there must be an epRemote to get message from
+                if (size > 0)
+                {
+                    byte[] receivedData = new byte[1464];
+                    receivedData = (byte[])aResult.AsyncState;
+                    ASCIIEncoding eEncoding = new ASCIIEncoding();
+                    string receivedMessage = eEncoding.GetString(receivedData);
+                    listBox1.Items.Add("Friends: " + receivedMessage);
+                }
+
+                byte[] buffer = new byte[1500];
+                sckText.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.ToString());
+            }
+        }
+
+        public static byte[] ReceiveVarData(Socket s)
+        {  
+            int total = 0;  
+            int recv;  
+            byte[] datasize = new byte[4];  
+            recv = s.Receive(datasize, 0, 4, SocketFlags.None);  
+            int size = BitConverter.ToInt32(datasize, 0);  
+            int dataleft = size;  
+            byte[] data = new byte[size];  
+            while (total<size)  
+            {  
+                recv = s.Receive(data, total, dataleft, SocketFlags.None);  
+                if (recv == 0)  
+                {  
+                    data = null;  
+                    break;  
+                }  
+                total += recv;  
+                dataleft -= recv;  
+            }  
+            return data;  
+        }  
+
+        private byte[] bitmapToByte(Bitmap btmp)
+        {
+            MemoryStream ms = new MemoryStream();
+            btmp.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+            byte[] bytes = ms.GetBuffer();
+            ms.Close();
+            return bytes;
+        }
+
+        private Bitmap StreamToBitmap(MemoryStream mem)
+        {
+            Console.WriteLine("The receiving buffer length is "+mem.Length);
+
+            Bitmap bm = (Bitmap)Image.FromStream(mem);
+            mem.Close();
+            return bm;
+        }
+
+        private void StartSendFile(FileStream file)
+        {
+            System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
+            int packetSize = 10240;
+            int packetCount = (int)(file.Length / (long)packetSize);
+            int lastDataPacket = (int)(file.Length - (long)(packetSize * packetCount));
+            byte[] fileNameByte = enc.GetBytes(file.Name.ToString());
+            byte[] packetSizeByte = enc.GetBytes(packetSize.ToString());
+            byte[] packetCountByte = enc.GetBytes(packetCount.ToString());
+            byte[] lastDataPacketByte = enc.GetBytes(lastDataPacket.ToString());
+            sckFile.Send(fileNameByte);
+            Console.Write("write file name");
+            sckFile.Send(packetSizeByte);
+            Console.Write("set packet Size");
+            sckFile.Send(packetCountByte);
+            Console.Write("set packet number");
+            
+            byte[] data = new byte[packetSize];
+            for(int i = 0; i < packetCount; i++)
+            {
+                file.Read(data, 0, data.Length);
+                sckFile.Send(data);
+            }
+            if(lastDataPacket != 0)
+            {
+                data = new byte[lastDataPacket];
+                file.Read(data, 0, data.Length);
+                sckFile.Send(data);
+            }
+        }
+
     }
 }
