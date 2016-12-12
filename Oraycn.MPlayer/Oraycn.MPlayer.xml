@@ -1,0 +1,2617 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Oraycn.MPlayer</name>
+    </assembly>
+    <members>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.VideoCapabilities">
+            <summary>
+            Capabilities of video device such as frame size and frame rate.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.VideoCapabilities.FrameSize">
+            <summary>
+            Frame size supported by video device.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.VideoCapabilities.MaxFrameRate">
+            <summary>
+            Maximum frame rate supported by video device for corresponding <see cref="F:Oraycn.MPlayer.Engine.DShow.VideoCapabilities.FrameSize">frame size</see>.
+            </summary>
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.Tools">
+            <summary>
+            Some miscellaneous functions.
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.Tools.GetPin(Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter,Oraycn.MPlayer.Engine.DShow.Core.PinDirection,System.Int32)">
+            <summary>
+            Get filter's pin.
+            </summary>
+            
+            <param name="filter">Filter to get pin of.</param>
+            <param name="dir">Pin's direction.</param>
+            <param name="num">Pin's number.</param>
+            
+            <returns>Returns filter's pin.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.Tools.GetInPin(Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter,System.Int32)">
+            <summary>
+            Get filter's input pin.
+            </summary>
+            
+            <param name="filter">Filter to get pin of.</param>
+            <param name="num">Pin's number.</param>
+            
+            <returns>Returns filter's pin.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.Tools.GetOutPin(Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter,System.Int32)">
+            <summary>
+            Get filter's output pin.
+            </summary>
+            
+            <param name="filter">Filter to get pin of.</param>
+            <param name="num">Pin's number.</param>
+            
+            <returns>Returns filter's pin.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.PinDirection">
+            <summary>
+            This enumeration indicates a pin's direction.
+            </summary>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.PinDirection.Input">
+            <summary>
+            Input pin.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.PinDirection.Output">
+            <summary>
+            Output pin.
+            </summary>
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.AMMediaType">
+            <summary>
+            The structure describes the format of a media sample.
+            </summary>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.AMMediaType.MajorType">
+            <summary>
+            Globally unique identifier (GUID) that specifies the major type of the media sample.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.AMMediaType.SubType">
+            <summary>
+            GUID that specifies the subtype of the media sample.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.AMMediaType.FixedSizeSamples">
+            <summary>
+            If <b>true</b>, samples are of a fixed size.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.AMMediaType.TemporalCompression">
+            <summary>
+            If <b>true</b>, samples are compressed using temporal (interframe) compression.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.AMMediaType.SampleSize">
+            <summary>
+            Size of the sample in bytes. For compressed data, the value can be zero.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.AMMediaType.FormatType">
+            <summary>
+            GUID that specifies the structure used for the format block.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.AMMediaType.unkPtr">
+            <summary>
+            Not used.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.AMMediaType.FormatSize">
+            <summary>
+            Size of the format block, in bytes.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.AMMediaType.FormatPtr">
+            <summary>
+            Pointer to the format block.
+            </summary>
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.AMMediaType.Finalize">
+            <summary>
+            Destroys the instance of the <see cref="T:Oraycn.MPlayer.Engine.DShow.Core.AMMediaType"/> class.
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.AMMediaType.Dispose">
+             <summary>
+             Dispose the object.
+             </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.AMMediaType.Dispose(System.Boolean)">
+            <summary>
+            Dispose the object
+            </summary>
+            
+            <param name="disposing">Indicates if disposing was initiated manually.</param>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.PinInfo">
+            <summary>
+            The structure contains information about a pin.
+            </summary>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.PinInfo.Filter">
+            <summary>
+            Owning filter.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.PinInfo.Direction">
+            <summary>
+            Direction of the pin.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.PinInfo.Name">
+            <summary>
+            Name of the pin.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.FilterInfo2.Name">
+            <summary>
+            Filter's name.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.FilterInfo2.FilterGraph">
+            <summary>
+            Owning graph.
+            </summary>
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.VideoInfoHeader">
+            <summary>
+            The structure describes the bitmap and color information for a video image.
+            </summary>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.VideoInfoHeader.SrcRect">
+            <summary>
+            <see cref="T:Oraycn.MPlayer.Engine.DShow.Core.RECT"/> structure that specifies the source video window.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.VideoInfoHeader.TargetRect">
+            <summary>
+            <see cref="T:Oraycn.MPlayer.Engine.DShow.Core.RECT"/> structure that specifies the destination video window.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.VideoInfoHeader.BitRate">
+            <summary>
+            Approximate data rate of the video stream, in bits per second.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.VideoInfoHeader.BitErrorRate">
+            <summary>
+            Data error rate, in bit errors per second.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.VideoInfoHeader.AverageTimePerFrame">
+            <summary>
+            The desired average display time of the video frames, in 100-nanosecond units.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.VideoInfoHeader.BmiHeader">
+            <summary>
+            <see cref="T:Oraycn.MPlayer.Engine.DShow.Core.BitmapInfoHeader"/> structure that contains color and dimension information for the video image bitmap.
+            </summary>
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.BitmapInfoHeader">
+            <summary>
+            The structure contains information about the dimensions and color format of a device-independent bitmap (DIB).
+            </summary>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.BitmapInfoHeader.Size">
+            <summary>
+            Specifies the number of bytes required by the structure.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.BitmapInfoHeader.Width">
+            <summary>
+            Specifies the width of the bitmap.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.BitmapInfoHeader.Height">
+            <summary>
+            Specifies the height of the bitmap, in pixels.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.BitmapInfoHeader.Planes">
+            <summary>
+            Specifies the number of planes for the target device. This value must be set to 1.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.BitmapInfoHeader.BitCount">
+            <summary>
+            Specifies the number of bits per pixel.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.BitmapInfoHeader.Compression">
+            <summary>
+            If the bitmap is compressed, this member is a <b>FOURCC</b> the specifies the compression.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.BitmapInfoHeader.ImageSize">
+            <summary>
+            Specifies the size, in bytes, of the image.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.BitmapInfoHeader.XPelsPerMeter">
+            <summary>
+            Specifies the horizontal resolution, in pixels per meter, of the target device for the bitmap.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.BitmapInfoHeader.YPelsPerMeter">
+            <summary>
+            Specifies the vertical resolution, in pixels per meter, of the target device for the bitmap.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.BitmapInfoHeader.ColorsUsed">
+            <summary>
+            Specifies the number of color indices in the color table that are actually used by the bitmap.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.BitmapInfoHeader.ColorsImportant">
+            <summary>
+            Specifies the number of color indices that are considered important for displaying the bitmap.
+            </summary>
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.RECT">
+            <summary>
+            The structure defines the coordinates of the upper-left and lower-right corners of a rectangle.
+            </summary>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.RECT.Left">
+            <summary>
+            Specifies the x-coordinate of the upper-left corner of the rectangle.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.RECT.Top">
+            <summary>
+            Specifies the y-coordinate of the upper-left corner of the rectangle. 
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.RECT.Right">
+            <summary>
+            Specifies the x-coordinate of the lower-right corner of the rectangle.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.RECT.Bottom">
+            <summary>
+            Specifies the y-coordinate of the lower-right corner of the rectangle.
+            </summary>
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.CAUUID">
+            <summary>
+            The CAUUID structure is a Counted Array of UUID or GUID types.
+            </summary>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.CAUUID.cElems">
+            <summary>
+            Size of the array pointed to by <b>pElems</b>.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.CAUUID.pElems">
+            <summary>
+            Pointer to an array of UUID values, each of which specifies UUID.
+            </summary>
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.CAUUID.ToGuidArray">
+            <summary>
+            Performs manual marshaling of <b>pElems</b> to retrieve an array of Guid objects.
+            </summary>
+            
+            <returns>A managed representation of <b>pElems</b>.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.DsEvCode">
+            <summary>
+            Enumeration of DirectShow event codes.
+            </summary>
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.IEnumPins">
+            <summary>
+            Enumerates pins on a filter.
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IEnumPins.Next(System.Int32,Oraycn.MPlayer.Engine.DShow.Core.IPin[],System.Int32@)">
+            <summary>
+            Retrieves a specified number of pins.
+            </summary>
+            
+            <param name="cPins">Number of pins to retrieve.</param>
+            <param name="pins">Array of size <b>cPins</b> that is filled with <b>IPin</b> pointers.</param>
+            <param name="pinsFetched">Receives the number of pins retrieved.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IEnumPins.Skip(System.Int32)">
+            <summary>
+            Skips a specified number of pins in the enumeration sequence.
+            </summary>
+            
+            <param name="cPins">Number of pins to skip.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IEnumPins.Reset">
+            <summary>
+            Resets the enumeration sequence to the beginning.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IEnumPins.Clone(Oraycn.MPlayer.Engine.DShow.Core.IEnumPins@)">
+            <summary>
+            Makes a copy of the enumerator with the same enumeration state. 
+            </summary>
+            
+            <param name="enumPins">Duplicate of the enumerator.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph">
+            <summary>
+            The interface provides methods for building a filter graph. An application can use it to add filters to
+            the graph, connect or disconnect filters, remove filters, and perform other basic operations. 
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph.AddFilter(Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter,System.String)">
+            <summary>
+            Adds a filter to the graph and gives it a name.
+            </summary>
+            
+            <param name="filter">Filter to add to the graph.</param>
+            <param name="name">Name of the filter.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph.RemoveFilter(Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter)">
+            <summary>
+            Removes a filter from the graph.
+            </summary>
+            
+            <param name="filter">Filter to be removed from the graph.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph.EnumFilters(System.IntPtr@)">
+            <summary>
+            Provides an enumerator for all filters in the graph.
+            </summary>
+            
+            <param name="enumerator">Filter enumerator.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph.FindFilterByName(System.String,Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter@)">
+            <summary>
+            Finds a filter that was added with a specified name.
+            </summary>
+            
+            <param name="name">Name of filter to search for.</param>
+            <param name="filter">Interface of found filter.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph.ConnectDirect(Oraycn.MPlayer.Engine.DShow.Core.IPin,Oraycn.MPlayer.Engine.DShow.Core.IPin,Oraycn.MPlayer.Engine.DShow.Core.AMMediaType)">
+            <summary>
+            Connects two pins directly (without intervening filters).
+            </summary>
+            
+            <param name="pinOut">Output pin.</param>
+            <param name="pinIn">Input pin.</param>
+            <param name="mediaType">Media type to use for the connection.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph.Reconnect(Oraycn.MPlayer.Engine.DShow.Core.IPin)">
+            <summary>
+            Breaks the existing pin connection and reconnects it to the same pin.
+            </summary>
+            
+            <param name="pin">Pin to disconnect and reconnect.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph.Disconnect(Oraycn.MPlayer.Engine.DShow.Core.IPin)">
+            <summary>
+            Disconnects a specified pin.
+            </summary>
+            
+            <param name="pin">Pin to disconnect.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph.SetDefaultSyncSource">
+            <summary>
+            Sets the reference clock to the default clock.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.ISampleGrabber">
+            <summary>
+            The interface is exposed by the Sample Grabber Filter. It enables an application to retrieve
+            individual media samples as they move through the filter graph.
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ISampleGrabber.SetOneShot(System.Boolean)">
+            <summary>
+            Specifies whether the filter should stop the graph after receiving one sample.
+            </summary>
+            
+            <param name="oneShot">Boolean value specifying whether the filter should stop the graph after receiving one sample.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ISampleGrabber.SetMediaType(Oraycn.MPlayer.Engine.DShow.Core.AMMediaType)">
+            <summary>
+            Specifies the media type for the connection on the Sample Grabber's input pin.
+            </summary>
+            
+            <param name="mediaType">Specifies the required media type.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ISampleGrabber.GetConnectedMediaType(Oraycn.MPlayer.Engine.DShow.Core.AMMediaType)">
+            <summary>
+            Retrieves the media type for the connection on the Sample Grabber's input pin.
+            </summary>
+            
+            <param name="mediaType"><see cref="T:Oraycn.MPlayer.Engine.DShow.Core.AMMediaType"/> structure, which receives media type.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ISampleGrabber.SetBufferSamples(System.Boolean)">
+            <summary>
+            Specifies whether to copy sample data into a buffer as it goes through the filter.
+            </summary>
+            
+            <param name="bufferThem">Boolean value specifying whether to buffer sample data.
+            If <b>true</b>, the filter copies sample data into an internal buffer.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ISampleGrabber.GetCurrentBuffer(System.Int32@,System.IntPtr)">
+            <summary>
+            Retrieves a copy of the sample that the filter received most recently.
+            </summary>
+            
+            <param name="bufferSize">Pointer to the size of the buffer. If pBuffer is NULL, this parameter receives the required size.</param>
+            <param name="buffer">Pointer to a buffer to receive a copy of the sample, or NULL.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ISampleGrabber.GetCurrentSample(System.IntPtr)">
+            <summary>
+            Not currently implemented.
+            </summary>
+            
+            <param name="sample"></param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ISampleGrabber.SetCallback(Oraycn.MPlayer.Engine.DShow.Core.ISampleGrabberCB,System.Int32)">
+            <summary>
+            Specifies a callback method to call on incoming samples.
+            </summary>
+            
+            <param name="callback"><see cref="T:Oraycn.MPlayer.Engine.DShow.Core.ISampleGrabberCB"/> interface containing the callback method, or NULL to cancel the callback.</param>
+            <param name="whichMethodToCallback">Index specifying the callback method.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.IPin">
+            <summary>
+            This interface is exposed by all input and output pins of DirectShow filters.
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IPin.Connect(Oraycn.MPlayer.Engine.DShow.Core.IPin,Oraycn.MPlayer.Engine.DShow.Core.AMMediaType)">
+            <summary>
+            Connects the pin to another pin.
+            </summary>
+            
+            <param name="receivePin">Other pin to connect to.</param>
+            <param name="mediaType">Type to use for the connections (optional).</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IPin.ReceiveConnection(Oraycn.MPlayer.Engine.DShow.Core.IPin,Oraycn.MPlayer.Engine.DShow.Core.AMMediaType)">
+            <summary>
+            Makes a connection to this pin and is called by a connecting pin.
+            </summary>
+            
+            <param name="receivePin">Connecting pin.</param>
+            <param name="mediaType">Media type of the samples to be streamed.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IPin.Disconnect">
+            <summary>
+            Breaks the current pin connection.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IPin.ConnectedTo(Oraycn.MPlayer.Engine.DShow.Core.IPin@)">
+            <summary>
+            Returns a pointer to the connecting pin.
+            </summary>
+            
+            <param name="pin">Receives <b>IPin</b> interface of connected pin (if any).</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IPin.ConnectionMediaType(Oraycn.MPlayer.Engine.DShow.Core.AMMediaType)">
+            <summary>
+            Returns the media type of this pin's connection.
+            </summary>
+            
+            <param name="mediaType">Pointer to an <see cref="T:Oraycn.MPlayer.Engine.DShow.Core.AMMediaType"/> structure. If the pin is connected,
+            the media type is returned. Otherwise, the structure is initialized to a default state in which
+            all elements are 0, with the exception of <b>lSampleSize</b>, which is set to 1, and
+            <b>FixedSizeSamples</b>, which is set to <b>true</b>.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IPin.QueryPinInfo(Oraycn.MPlayer.Engine.DShow.Core.PinInfo@)">
+            <summary>
+            Retrieves information about this pin (for example, the name, owning filter, and direction).
+            </summary>
+            
+            <param name="pinInfo"><see cref="T:Oraycn.MPlayer.Engine.DShow.Core.PinInfo"/> structure that receives the pin information.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IPin.QueryDirection(Oraycn.MPlayer.Engine.DShow.Core.PinDirection@)">
+            <summary>
+            Retrieves the direction for this pin.
+            </summary>
+            
+            <param name="pinDirection">Receives direction of the pin.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IPin.QueryId(System.String@)">
+            <summary>
+            Retrieves an identifier for the pin.
+            </summary>
+            
+            <param name="id">Pin identifier.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IPin.QueryAccept(Oraycn.MPlayer.Engine.DShow.Core.AMMediaType)">
+            <summary>
+            Queries whether a given media type is acceptable by the pin.
+            </summary>
+            
+            <param name="mediaType"><see cref="T:Oraycn.MPlayer.Engine.DShow.Core.AMMediaType"/> structure that specifies the media type.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IPin.EnumMediaTypes(System.IntPtr)">
+            <summary>
+            Provides an enumerator for this pin's preferred media types.
+            </summary>
+            
+            <param name="enumerator">Address of a variable that receives a pointer to the <b>IEnumMediaTypes</b> interface.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IPin.QueryInternalConnections(System.IntPtr,System.Int32@)">
+            <summary>
+            Provides an array of the pins to which this pin internally connects.
+            </summary>
+            
+            <param name="apPin">Address of an array of <b>IPin</b> pointers.</param>
+            <param name="nPin">On input, specifies the size of the array. When the method returns,
+            the value is set to the number of pointers returned in the array.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IPin.EndOfStream">
+            <summary>
+            Notifies the pin that no additional data is expected.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IPin.BeginFlush">
+            <summary>
+            Begins a flush operation.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IPin.EndFlush">
+            <summary>
+            Ends a flush operation.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IPin.NewSegment(System.Int64,System.Int64,System.Double)">
+            <summary>
+            Specifies that samples following this call are grouped as a segment with a given start time, stop time, and rate.
+            </summary>
+            
+            <param name="start">Start time of the segment, relative to the original source, in 100-nanosecond units.</param>
+            <param name="stop">End time of the segment, relative to the original source, in 100-nanosecond units.</param>
+            <param name="rate">Rate at which this segment should be processed, as a percentage of the original rate.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.FilterInfo">
+            <summary>
+            DirectShow filter information.
+            </summary>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.FilterInfo.Name">
+            <summary>
+            Filter name.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.FilterInfo.MonikerString">
+            <summary>
+            Filters's moniker string.
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.FilterInfo.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Oraycn.MPlayer.Engine.DShow.FilterInfo"/> class.
+            </summary>
+            
+            <param name="monikerString">Filters's moniker string.</param>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.FilterInfo.#ctor(System.Runtime.InteropServices.ComTypes.IMoniker)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Oraycn.MPlayer.Engine.DShow.FilterInfo"/> class.
+            </summary>
+            
+            <param name="moniker">Filter's moniker object.</param>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.FilterInfo.CompareTo(System.Object)">
+            <summary>
+            Compare the object with another instance of this class.
+            </summary>
+            
+            <param name="value">Object to compare with.</param>
+            
+            <returns>A signed number indicating the relative values of this instance and <b>value</b>.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.FilterInfo.CreateFilter(System.String)">
+            <summary>
+            Create an instance of the filter.
+            </summary>
+            
+            <param name="filterMoniker">Filter's moniker string.</param>
+            
+            <returns>Returns filter's object, which implements <b>IBaseFilter</b> interface.</returns>
+            
+            <remarks>The returned filter's object should be released using <b>Marshal.ReleaseComObject()</b>.</remarks>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.IMediaControl">
+            <summary>
+            The interface provides methods for controlling the flow of data through the filter graph.
+            It includes methods for running, pausing, and stopping the graph.
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaControl.Run">
+            <summary>
+            Runs all the filters in the filter graph.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaControl.Pause">
+            <summary>
+            Pauses all filters in the filter graph.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaControl.Stop">
+            <summary>
+            Stops all the filters in the filter graph.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaControl.GetState(System.Int32,System.Int32@)">
+            <summary>
+            Retrieves the state of the filter graph.
+            </summary>
+            
+            <param name="timeout">Duration of the time-out, in milliseconds, or INFINITE to specify an infinite time-out.</param>
+            <param name="filterState">蘟riable that receives a member of the <b>FILTER_STATE</b> enumeration.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaControl.RenderFile(System.String)">
+            <summary>
+            Builds a filter graph that renders the specified file.
+            </summary>
+            
+            <param name="fileName">Name of the file to render</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaControl.AddSourceFilter(System.String,System.Object@)">
+            <summary>
+            Adds a source filter to the filter graph, for a specified file.
+            </summary>
+            
+            <param name="fileName">Name of the file containing the source video.</param>
+            <param name="filterInfo">Receives interface of filter information object.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaControl.get_FilterCollection(System.Object@)">
+            <summary>
+            Retrieves a collection of the filters in the filter graph.
+            </summary>
+            
+            <param name="collection">Receives the <b>IAMCollection</b> interface.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaControl.get_RegFilterCollection(System.Object@)">
+            <summary>
+            Retrieves a collection of all the filters listed in the registry.
+            </summary>
+            
+            <param name="collection">Receives the <b>IDispatch</b> interface of <b>IAMCollection</b> object.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaControl.StopWhenReady">
+            <summary>
+            Pauses the filter graph, allowing filters to queue data, and then stops the filter graph.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2">
+            <summary>
+            This interface extends the <see cref="T:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph"/> and <see cref="T:Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder"/>
+            interfaces, which contain methods for building filter graphs.
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.AddFilter(Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter,System.String)">
+            <summary>
+            Adds a filter to the graph and gives it a name.
+            </summary>
+            
+            <param name="filter">Filter to add to the graph.</param>
+            <param name="name">Name of the filter.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.RemoveFilter(Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter)">
+            <summary>
+            Removes a filter from the graph.
+            </summary>
+            
+            <param name="filter">Filter to be removed from the graph.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.EnumFilters(Oraycn.MPlayer.Engine.DShow.Core.IEnumFilters@)">
+            <summary>
+            Provides an enumerator for all filters in the graph.
+            </summary>
+            
+            <param name="enumerator">Filter enumerator.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.FindFilterByName(System.String,Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter@)">
+            <summary>
+            Finds a filter that was added with a specified name.
+            </summary>
+            
+            <param name="name">Name of filter to search for.</param>
+            <param name="filter">Interface of found filter.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.ConnectDirect(Oraycn.MPlayer.Engine.DShow.Core.IPin,Oraycn.MPlayer.Engine.DShow.Core.IPin,Oraycn.MPlayer.Engine.DShow.Core.AMMediaType)">
+            <summary>
+            Connects two pins directly (without intervening filters).
+            </summary>
+            
+            <param name="pinOut">Output pin.</param>
+            <param name="pinIn">Input pin.</param>
+            <param name="mediaType">Media type to use for the connection.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.Reconnect(Oraycn.MPlayer.Engine.DShow.Core.IPin)">
+            <summary>
+            Breaks the existing pin connection and reconnects it to the same pin.
+            </summary>
+            
+            <param name="pin">Pin to disconnect and reconnect.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.Disconnect(Oraycn.MPlayer.Engine.DShow.Core.IPin)">
+            <summary>
+            Disconnects a specified pin.
+            </summary>
+            
+            <param name="pin">Pin to disconnect.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.SetDefaultSyncSource">
+            <summary>
+            Sets the reference clock to the default clock.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.Connect(Oraycn.MPlayer.Engine.DShow.Core.IPin,Oraycn.MPlayer.Engine.DShow.Core.IPin)">
+            <summary>
+            Connects two pins. If they will not connect directly, this method connects them with intervening transforms.
+            </summary>
+            
+            <param name="pinOut">Output pin.</param>
+            <param name="pinIn">Input pin.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.Render(Oraycn.MPlayer.Engine.DShow.Core.IPin)">
+            <summary>
+            Adds a chain of filters to a specified output pin to render it.
+            </summary>
+            
+            <param name="pinOut">Output pin.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.RenderFile(System.String,System.String)">
+            <summary>
+            Builds a filter graph that renders the specified file.
+            </summary>
+            
+            <param name="file">Specifies a string that contains file name or device moniker.</param>
+            <param name="playList">Reserved.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.AddSourceFilter(System.String,System.String,Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter@)">
+            <summary>
+            Adds a source filter to the filter graph for a specific file.
+            </summary>
+            
+            <param name="fileName">Specifies the name of the file to load.</param>
+            <param name="filterName">Specifies a name for the source filter.</param>
+            <param name="filter">Variable that receives the interface of the source filter.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.SetLogFile(System.IntPtr)">
+            <summary>
+            Sets the file for logging actions taken when attempting to perform an operation.
+            </summary>
+            
+            <param name="hFile">Handle to the log file.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.Abort">
+            <summary>
+            Requests that the graph builder return as soon as possible from its current task.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.ShouldOperationContinue">
+            <summary>
+            Queries whether the current operation should continue.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.AddSourceFilterForMoniker(System.Runtime.InteropServices.ComTypes.IMoniker,System.Runtime.InteropServices.ComTypes.IBindCtx,System.String,Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter@)">
+            <summary>
+            
+            </summary>
+            
+            <param name="moniker">Moniker interface.</param>
+            <param name="bindContext">Bind context interface.</param>
+            <param name="filterName">Name for the filter.</param>
+            <param name="filter"> Receives source filter's IBaseFilter interface.
+            The caller must release the interface.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.ReconnectEx(Oraycn.MPlayer.Engine.DShow.Core.IPin,Oraycn.MPlayer.Engine.DShow.Core.AMMediaType)">
+            <summary>
+            Breaks the existing pin connection and reconnects it to the same pin,
+            using a specified media type.
+            </summary>
+            
+            <param name="pin">Pin to disconnect and reconnect.</param>
+            <param name="mediaType">Media type to reconnect with.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph2.RenderEx(Oraycn.MPlayer.Engine.DShow.Core.IPin,System.Int32,System.IntPtr)">
+            <summary>
+            Render an output pin, with an option to use existing renderers only.
+            </summary>
+            
+            <param name="outputPin">Interface of the output pin.</param>
+            <param name="flags">Flag that specifies how to render the pin.</param>
+            <param name="context">Reserved.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter">
+            <summary>
+            The IBaseFilter interface provides methods for controlling a filter.
+            All DirectShow filters expose this interface
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter.GetClassID(System.Guid@)">
+            <summary>
+            Returns the class identifier (CLSID) for the component object.
+            </summary>
+            
+            <param name="ClassID">Points to the location of the CLSID on return.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter.Stop">
+            <summary>
+            Stops the filter.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter.Pause">
+            <summary>
+            Pauses the filter.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter.Run(System.Int64)">
+            <summary>
+            Runs the filter.
+            </summary>
+            
+            <param name="start">Reference time corresponding to stream time 0.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter.GetState(System.Int32,System.Int32@)">
+            <summary>
+            Retrieves the state of the filter (running, stopped, or paused).
+            </summary>
+            
+            <param name="milliSecsTimeout">Time-out interval, in milliseconds.</param>
+            <param name="filterState">Pointer to a variable that receives filter's state.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter.SetSyncSource(System.IntPtr)">
+            <summary>
+            Sets the reference clock for the filter or the filter graph.
+            </summary>
+            
+            <param name="clock">Pointer to the clock's <b>IReferenceClock</b> interface, or NULL. </param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter.GetSyncSource(System.IntPtr@)">
+            <summary>
+            Retrieves the current reference clock.
+            </summary>
+            
+            <param name="clock">Address of a variable that receives a pointer to the clock's IReferenceClock interface.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter.EnumPins(Oraycn.MPlayer.Engine.DShow.Core.IEnumPins@)">
+            <summary>
+            Enumerates the pins on this filter.
+            </summary>
+            
+            <param name="enumPins">Address of a variable that receives a pointer to the IEnumPins interface.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter.FindPin(System.String,Oraycn.MPlayer.Engine.DShow.Core.IPin@)">
+            <summary>
+            Retrieves the pin with the specified identifier.
+            </summary>
+            
+            <param name="id">Pointer to a constant wide-character string that identifies the pin.</param>
+            <param name="pin">Address of a variable that receives a pointer to the pin's IPin interface.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter.QueryFilterInfo(Oraycn.MPlayer.Engine.DShow.Core.FilterInfo2@)">
+            <summary>
+            Retrieves information about the filter.
+            </summary>
+            
+            <param name="filterInfo">Pointer to <b>FilterInfo</b> structure.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter.JoinFilterGraph(Oraycn.MPlayer.Engine.DShow.Core.IFilterGraph,System.String)">
+            <summary>
+            Notifies the filter that it has joined or left the filter graph.
+            </summary>
+            
+            <param name="graph">Pointer to the Filter Graph Manager's <b>IFilterGraph</b> interface, or NULL
+            if the filter is leaving the graph.</param>
+            <param name="name">String that specifies a name for the filter.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter.QueryVendorInfo(System.String@)">
+            <summary>
+            Retrieves a string containing vendor information.
+            </summary>
+            
+            <param name="vendorInfo">Receives a string containing the vendor information.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.ISampleGrabberCB">
+            <summary>
+            The interface provides callback methods for the <see cref="M:Oraycn.MPlayer.Engine.DShow.Core.ISampleGrabber.SetCallback(Oraycn.MPlayer.Engine.DShow.Core.ISampleGrabberCB,System.Int32)"/> method.
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ISampleGrabberCB.SampleCB(System.Double,System.IntPtr)">
+            <summary>
+            Callback method that receives a pointer to the media sample.
+            </summary>
+            
+            <param name="sampleTime">Starting time of the sample, in seconds.</param>
+            <param name="sample">Pointer to the sample's <b>IMediaSample</b> interface.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ISampleGrabberCB.BufferCB(System.Double,System.IntPtr,System.Int32)">
+            <summary>
+            Callback method that receives a pointer to the sample buffer?
+            </summary>
+            
+            <param name="sampleTime">Starting time of the sample, in seconds.</param>
+            <param name="buffer">Pointer to a buffer that contains the sample data.</param>
+            <param name="bufferLen">Length of the buffer pointed to by <b>buffer</b>, in bytes</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.Win32">
+            <summary>
+            Some Win32 API used internally.
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.Win32.CreateBindCtx(System.Int32,System.Runtime.InteropServices.ComTypes.IBindCtx@)">
+            <summary>
+            Supplies a pointer to an implementation of <b>IBindCtx</b> (a bind context object).
+            This object stores information about a particular moniker-binding operation.
+            </summary>
+            
+            <param name="reserved">Reserved for future use; must be zero.</param>
+            <param name="ppbc">Address of <b>IBindCtx*</b> pointer variable that receives the
+            interface pointer to the new bind context object.</param>
+            
+            <returns>Returns <b>S_OK</b> on success.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.Win32.MkParseDisplayName(System.Runtime.InteropServices.ComTypes.IBindCtx,System.String,System.Int32@,System.Runtime.InteropServices.ComTypes.IMoniker@)">
+            <summary>
+            Converts a string into a moniker that identifies the object named by the string.
+            </summary>
+            
+            <param name="pbc">Pointer to the IBindCtx interface on the bind context object to be used in this binding operation.</param>
+            <param name="szUserName">Pointer to a zero-terminated wide character string containing the display name to be parsed. </param>
+            <param name="pchEaten">Pointer to the number of characters of szUserName that were consumed.</param>
+            <param name="ppmk">Address of <b>IMoniker*</b> pointer variable that receives the interface pointer
+            to the moniker that was built from <b>szUserName</b>.</param>
+            
+            <returns>Returns <b>S_OK</b> on success.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.Win32.memcpy(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Copy a block of memory.
+            </summary>
+            
+            <param name="dst">Destination pointer.</param>
+            <param name="src">Source pointer.</param>
+            <param name="count">Memory block's length to copy.</param>
+            
+            <returns>Return's the value of <b>dst</b> - pointer to destination.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.Win32.OleCreatePropertyFrame(System.IntPtr,System.Int32,System.Int32,System.String,System.Int32,System.Object@,System.Int32,System.IntPtr,System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            Invokes a new property frame, that is, a property sheet dialog box.
+            </summary>
+            
+            <param name="hwndOwner">Parent window of property sheet dialog box.</param>
+            <param name="x">Horizontal position for dialog box.</param>
+            <param name="y">Vertical position for dialog box.</param>
+            <param name="caption">Dialog box caption.</param>
+            <param name="cObjects">Number of object pointers in <b>ppUnk</b>.</param>
+            <param name="ppUnk">Pointer to the objects for property sheet.</param>
+            <param name="cPages">Number of property pages in <b>lpPageClsID</b>.</param>
+            <param name="lpPageClsID">Array of CLSIDs for each property page.</param>
+            <param name="lcid">Locale identifier for property sheet locale.</param>
+            <param name="dwReserved">Reserved.</param>
+            <param name="lpvReserved">Reserved.</param>
+            
+            <returns>Returns <b>S_OK</b> on success.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.Clsid">
+            <summary>
+            DirectShow class IDs.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.Clsid.SystemDeviceEnum">
+            <summary>
+            System device enumerator.
+            </summary>
+            
+            <remarks>Equals to CLSID_SystemDeviceEnum.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.Clsid.FilterGraph">
+            <summary>
+            Filter graph.
+            </summary>
+            
+            <remarks>Equals to CLSID_FilterGraph.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.Clsid.SampleGrabber">
+            <summary>
+            Sample grabber.
+            </summary>
+            
+            <remarks>Equals to CLSID_SampleGrabber.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.Clsid.CaptureGraphBuilder2">
+            <summary>
+            Capture graph builder.
+            </summary>
+            
+            <remarks>Equals to CLSID_CaptureGraphBuilder2.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.Clsid.AsyncReader">
+            <summary>
+            Async reader.
+            </summary>
+            
+            <remarks>Equals to CLSID_AsyncReader.</remarks>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.MediaType">
+            <summary>
+            DirectShow media types?
+            </summary>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.MediaType.Video">
+            <summary>
+            Video.
+            </summary>
+            
+            <remarks>Equals to MEDIATYPE_Video.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.MediaType.Interleaved">
+            <summary>
+            Interleaved. Used by Digital Video (DV).
+            </summary>
+            
+            <remarks>Equals to MEDIATYPE_Interleaved.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.MediaType.Audio">
+            <summary>
+            Audio.
+            </summary>
+            
+            <remarks>Equals to MEDIATYPE_Audio.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.MediaType.Text">
+            <summary>
+            Text.
+            </summary>
+            
+            <remarks>Equals to MEDIATYPE_Text.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.MediaType.Stream">
+            <summary>
+            Byte stream with no time stamps.
+            </summary>
+            
+            <remarks>Equals to MEDIATYPE_Stream.</remarks>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.MediaSubType">
+            <summary>
+            DirectShow media subtypes.
+            </summary>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.MediaSubType.YUYV">
+            <summary>
+            YUY2 (packed 4:2:2).
+            </summary>
+            
+            <remarks>Equals to MEDIASUBTYPE_YUYV.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.MediaSubType.IYUV">
+            <summary>
+            IYUV.
+            </summary>
+            
+            <remarks>Equals to MEDIASUBTYPE_IYUV.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.MediaSubType.DVSD">
+            <summary>
+            A DV encoding format. (FOURCC 'DVSD')
+            </summary>
+            
+            <remarks>Equals to MEDIASUBTYPE_DVSD.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.MediaSubType.RGB1">
+            <summary>
+            RGB, 1 bit per pixel (bpp), palettized.
+            </summary>
+            
+            <remarks>Equals to MEDIASUBTYPE_RGB1.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.MediaSubType.RGB4">
+            <summary>
+            RGB, 4 bpp, palettized.
+            </summary>
+            
+            <remarks>Equals to MEDIASUBTYPE_RGB4.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.MediaSubType.RGB8">
+            <summary>
+            RGB, 8 bpp.
+            </summary>
+            
+            <remarks>Equals to MEDIASUBTYPE_RGB8.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.MediaSubType.RGB565">
+            <summary>
+            RGB 565, 16 bpp.
+            </summary>
+            
+            <remarks>Equals to MEDIASUBTYPE_RGB565.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.MediaSubType.RGB555">
+            <summary>
+            RGB 555, 16 bpp.
+            </summary>
+            
+            <remarks>Equals to MEDIASUBTYPE_RGB555.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.MediaSubType.RGB24">
+            <summary>
+            RGB, 24 bpp.
+            </summary>
+            
+            <remarks>Equals to MEDIASUBTYPE_RGB24.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.MediaSubType.RGB32">
+            <summary>
+            RGB, 32 bpp, no alpha channel.
+            </summary>
+            
+            <remarks>Equals to MEDIASUBTYPE_RGB32.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.MediaSubType.Avi">
+            <summary>
+            Data from AVI file.
+            </summary>
+            
+            <remarks>Equals to MEDIASUBTYPE_Avi.</remarks>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.MediaSubType.Asf">
+            <summary>
+            Advanced Streaming Format (ASF).
+            </summary>
+            
+            <remarks>Equals to MEDIASUBTYPE_Asf.</remarks>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.PinCategory">
+            <summary>
+            DirectShow pin categories.
+            </summary>
+            
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.Core.PinCategory.Capture">
+            <summary>
+            Capture pin.
+            </summary>
+            
+            <remarks>Equals to PIN_CATEGORY_CAPTURE.</remarks>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.IFileSourceFilter">
+            <summary>
+            The interface is exposed by source filters to set the file name and media type of the media file that they are to render.
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFileSourceFilter.Load(System.String,Oraycn.MPlayer.Engine.DShow.Core.AMMediaType)">
+            <summary>
+            Loads the source filter with the file.
+            </summary>
+            
+            <param name="fileName">The name of the file to open.</param>
+            <param name="mediaType">Media type of the file. This can be null.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IFileSourceFilter.GetCurFile(System.String@,Oraycn.MPlayer.Engine.DShow.Core.AMMediaType)">
+            <summary>
+            Retrieves the current file.
+            </summary>
+            
+            <param name="fileName">Name of media file.</param>
+            <param name="mediaType">Receives media type.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.ICaptureGraphBuilder2">
+            <summary>
+            This interface builds capture graphs and other custom filter graphs. 
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ICaptureGraphBuilder2.SetFiltergraph(Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder)">
+            <summary>
+            Specify filter graph for the capture graph builder to use.
+            </summary>
+            
+            <param name="graphBuilder">Filter graph's interface.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ICaptureGraphBuilder2.GetFiltergraph(Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder@)">
+            <summary>
+            Retrieve the filter graph that the builder is using.
+            </summary>
+            
+            <param name="graphBuilder">Filter graph's interface.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ICaptureGraphBuilder2.SetOutputFileName(System.Guid,System.String,Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter@,System.IntPtr@)">
+            <summary>
+            Create file writing section of the filter graph.
+            </summary>
+            
+            <param name="type">GUID that represents either the media subtype of the output or the
+            class identifier (CLSID) of a multiplexer filter or file writer filter.</param>
+            <param name="fileName">Output file name.</param>
+            <param name="baseFilter">Receives the multiplexer's <see cref="T:Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter"/> interface.</param>
+            <param name="fileSinkFilter">Receives the file writer's IFileSinkFilter interface. Can be NULL.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ICaptureGraphBuilder2.FindInterface(System.Guid,System.Guid,Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter,System.Guid,System.Object@)">
+            <summary>
+            Searche the graph for a specified interface, starting from a specified filter.
+            </summary>
+            
+            <param name="category">GUID that specifies the search criteria.</param>
+            <param name="type">GUID that specifies the major media type of an output pin, or NULL.</param>
+            <param name="baseFilter"><see cref="T:Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter"/> interface of the filter. The method begins searching from this filter.</param>
+            <param name="interfaceID">Interface identifier (IID) of the interface to locate.</param>
+            <param name="retInterface">Receives found interface.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ICaptureGraphBuilder2.RenderStream(System.Guid,System.Guid,System.Object,Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter,Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter)">
+            <summary>
+            Connect an output pin on a source filter to a rendering filter, optionally through a compression filter.
+            </summary>
+            
+            <param name="category">Pin category.</param>
+            <param name="mediaType">Major-type GUID that specifies the media type of the output pin.</param>
+            <param name="source">Starting filter for the connection.</param>
+            <param name="compressor">Interface of an intermediate filter, such as a compression filter. Can be NULL.</param>
+            <param name="renderer">Sink filter, such as a renderer or mux filter.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ICaptureGraphBuilder2.ControlStream(System.Guid,System.Guid,Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter,System.Int64,System.Int64,System.Int16,System.Int16)">
+            <summary>
+            Set the start and stop times for one or more streams of captured data.
+            </summary>
+            
+            <param name="category">Pin category.</param>
+            <param name="mediaType">Major-type GUID that specifies the media type.</param>
+            <param name="filter"><see cref="T:Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter"/> interface that specifies which filter to control.</param>
+            <param name="start">Start time.</param>
+            <param name="stop">Stop time.</param>
+            <param name="startCookie">Value that is sent as the second parameter of the
+            EC_STREAM_CONTROL_STARTED event notification.</param>
+            <param name="stopCookie">Value that is sent as the second parameter of the
+            EC_STREAM_CONTROL_STOPPED event notification.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ICaptureGraphBuilder2.AllocCapFile(System.String,System.Int64)">
+            <summary>
+            Preallocate a capture file to a specified size.
+            </summary>
+            
+            <param name="fileName">File name to create or resize.</param>
+            <param name="size">Size of the file to allocate, in bytes.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ICaptureGraphBuilder2.CopyCaptureFile(System.String,System.String,System.Boolean,System.IntPtr)">
+            <summary>
+            Copy the valid media data from a capture file.
+            </summary>
+            
+            <param name="oldFileName">Old file name.</param>
+            <param name="newFileName">New file name.</param>
+            <param name="allowEscAbort">Boolean value that specifies whether pressing the ESC key cancels the copy operation.</param>
+            <param name="callback">IAMCopyCaptureFileProgress interface to display progress information, or NULL.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ICaptureGraphBuilder2.FindPin(System.Object,Oraycn.MPlayer.Engine.DShow.Core.PinDirection,System.Guid,System.Guid,System.Boolean,System.Int32,Oraycn.MPlayer.Engine.DShow.Core.IPin@)">
+            <summary>
+            
+            </summary>
+            
+            <param name="source">Interface on a filter, or to an interface on a pin.</param>
+            <param name="pinDirection">Pin direction (input or output).</param>
+            <param name="category">Pin category.</param>
+            <param name="mediaType">Media type.</param>
+            <param name="unconnected">Boolean value that specifies whether the pin must be unconnected.</param>
+            <param name="index">Zero-based index of the pin to retrieve, from the set of matching pins.</param>
+            <param name="pin">Interface of the matching pin.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.IMediaEventEx">
+            <summary>
+            The interface inherits contains methods for retrieving event notifications and for overriding the
+            filter graph's default handling of events.
+            </summary>
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaEventEx.GetEventHandle(System.IntPtr@)">
+            <summary>
+            Retrieves a handle to a manual-reset event that remains signaled while the queue contains event notifications.
+            </summary>
+            <param name="hEvent">Pointer to a variable that receives the event handle.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaEventEx.GetEvent(Oraycn.MPlayer.Engine.DShow.Core.DsEvCode@,System.Int32@,System.Int32@,System.Int32)">
+            <summary>
+            Retrieves the next event notification from the event queue.
+            </summary>
+            
+            <param name="lEventCode">Variable that receives the event code.</param>
+            <param name="lParam1">Pointer to a variable that receives the first event parameter.</param>
+            <param name="lParam2">Pointer to a variable that receives the second event parameter.</param>
+            <param name="msTimeout">Time-out interval, in milliseconds.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaEventEx.WaitForCompletion(System.Int32,System.Int32@)">
+            <summary>
+            Waits for the filter graph to render all available data.
+            </summary>
+            
+            <param name="msTimeout">Time-out interval, in milliseconds. Pass zero to return immediately.</param>
+            <param name="pEvCode">Pointer to a variable that receives an event code.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaEventEx.CancelDefaultHandling(System.Int32)">
+            <summary>
+            Cancels the Filter Graph Manager's default handling for a specified event.
+            </summary>
+            
+            <param name="lEvCode">Event code for which to cancel default handling.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaEventEx.RestoreDefaultHandling(System.Int32)">
+            <summary>
+            Restores the Filter Graph Manager's default handling for a specified event.
+            </summary>
+            <param name="lEvCode">Event code for which to restore default handling.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaEventEx.FreeEventParams(Oraycn.MPlayer.Engine.DShow.Core.DsEvCode,System.Int32,System.Int32)">
+            <summary>
+            Frees resources associated with the parameters of an event.
+            </summary>
+            <param name="lEvCode">Event code.</param>
+            <param name="lParam1">First event parameter.</param>
+            <param name="lParam2">Second event parameter.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaEventEx.SetNotifyWindow(System.IntPtr,System.Int32,System.IntPtr)">
+            <summary>
+            Registers a window to process event notifications.
+            </summary>
+            
+            <param name="hwnd">Handle to the window, or <see cref="F:System.IntPtr.Zero"/> to stop receiving event messages.</param>
+            <param name="lMsg">Window message to be passed as the notification.</param>
+            <param name="lInstanceData">Value to be passed as the <i>lParam</i> parameter for the <i>lMsg</i> message.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaEventEx.SetNotifyFlags(System.Int32)">
+            <summary>
+            Enables or disables event notifications.
+            </summary>
+            
+            <param name="lNoNotifyFlags">Value indicating whether to enable or disable event notifications.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IMediaEventEx.GetNotifyFlags(System.Int32@)">
+            <summary>
+            Determines whether event notifications are enabled.
+            </summary>
+            
+            <param name="lplNoNotifyFlags">Variable that receives current notification status.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.IAMStreamConfig">
+            <summary>
+            This interface sets the output format on certain capture and compression filters,
+            for both audio and video.
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IAMStreamConfig.SetFormat(Oraycn.MPlayer.Engine.DShow.Core.AMMediaType)">
+            <summary>
+            Set the output format on the pin.
+            </summary>
+            
+            <param name="mediaType">Media type to set.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IAMStreamConfig.GetFormat(Oraycn.MPlayer.Engine.DShow.Core.AMMediaType@)">
+            <summary>
+            Retrieves the audio or video stream's format.
+            </summary>
+            
+            <param name="mediaType">Retrieved media type.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IAMStreamConfig.GetNumberOfCapabilities(System.Int32@,System.Int32@)">
+            <summary>
+            Retrieve the number of format capabilities that this pin supports.
+            </summary>
+            
+            <param name="count">Variable that receives the number of format capabilities.</param>
+            <param name="size">Variable that receives the size of the configuration structure in bytes.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IAMStreamConfig.GetStreamCaps(System.Int32,Oraycn.MPlayer.Engine.DShow.Core.AMMediaType@,Oraycn.MPlayer.Engine.DShow.Core.VideoStreamConfigCaps)">
+            <summary>
+            Retrieve a set of format capabilities.
+            </summary>
+            
+            <param name="index">Specifies the format capability to retrieve, indexed from zero.</param>
+            <param name="mediaType">Retrieved media type.</param>
+            <param name="streamConfigCaps">Byte array, which receives information about capabilities.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.FilterCategory">
+            <summary>
+            DirectShow filter categories.
+            </summary>
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.FilterCategory.AudioInputDevice">
+            <summary>
+            Audio input device category.Equals to CLSID_AudioInputDeviceCategory.
+            </summary>       
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.FilterCategory.VideoInputDevice">
+            <summary>
+            Video input device category. Equals to CLSID_VideoInputDeviceCategory.
+            </summary>       
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.FilterCategory.VideoCompressorCategory">
+            <summary>
+            Video compressor category. Equals to CLSID_VideoCompressorCategory.
+            </summary>       
+        </member>
+        <member name="F:Oraycn.MPlayer.Engine.DShow.FilterCategory.AudioCompressorCategory">
+            <summary>
+            Audio compressor category. Equals to CLSID_AudioCompressorCategory.
+            </summary>        
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.ISpecifyPropertyPages">
+            <summary>
+            The interface indicates that an object supports property pages.
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ISpecifyPropertyPages.GetPages(Oraycn.MPlayer.Engine.DShow.Core.CAUUID@)">
+            <summary>
+            Fills a counted array of GUID values where each GUID specifies the
+            CLSID of each property page that can be displayed in the property
+            sheet for this object.
+            </summary>
+            
+            <param name="pPages">Pointer to a CAUUID structure that must be initialized
+            and filled before returning.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.ICreateDevEnum">
+            <summary>
+            The <b>ICreateDevEnum</b> interface creates an enumerator for devices within a particular category,
+            such as video capture devices, audio capture devices, video compressors, and so forth.
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.ICreateDevEnum.CreateClassEnumerator(System.Guid@,System.Runtime.InteropServices.ComTypes.IEnumMoniker@,System.Int32)">
+            <summary>
+            Creates a class enumerator for a specified device category.
+            </summary>
+            
+            <param name="type">Specifies the class identifier of the device category.</param>
+            <param name="enumMoniker">Address of a variable that receives an <b>IEnumMoniker</b> interface pointer</param>
+            <param name="flags">Bitwise combination of zero or more flags. If zero, the method enumerates every filter in the category.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.PlayerFactory">
+            <summary>
+            播放器工厂。
+            </summary>
+        </member>
+        <member name="M:Oraycn.MPlayer.PlayerFactory.CreateAudioPlayer(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            创建声音播放器。用于播放PCM声音数据。默认采样位数：16，默认缓存大小：10秒。
+            </summary>
+            <param name="speakerIndex">使用的扬声器设备的索引。</param>
+            <param name="sampleRate">声音数据的采样率。</param>       
+            <param name="channelCount">声道数。</param>
+        </member>
+        <member name="M:Oraycn.MPlayer.PlayerFactory.CreateAudioPlayer(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            创建声音播放器。用于播放PCM声音数据。
+            </summary>
+            <param name="speakerIndex">使用的扬声器设备的索引。</param>
+            <param name="sampleRate">声音数据的采样率。</param>
+            <param name="channelCount">声道数。</param>
+            <param name="bitsNumber">声音数据的采样位数。一般为16。</param>        
+            <param name="bufferSizeInSecs">缓冲区的大小：最多存储几秒钟的声音数据。默认值为10秒。</param>
+        </member>
+        <member name="M:Oraycn.MPlayer.PlayerFactory.ParseWaveFile(System.String)">
+            <summary>
+            解析WAV文件。
+            </summary>        
+        </member>
+        <member name="M:Oraycn.MPlayer.AuthorizationVerifier.SetAuthorizedUser(System.String,System.String)">
+            <summary>
+            被授权的用户需要在程序初始化开始时先调用该方法注册。如果不调用此方法注册，则将以Free版本运行。        
+            </summary>       
+        </member>
+        <member name="T:Oraycn.MPlayer.AudioInformation">
+            <summary>
+            声音数据的格式信息。
+            </summary>
+        </member>
+        <member name="M:Oraycn.MPlayer.AudioInformation.GetTimeInMsecs">
+            <summary>
+            语音数据的时长。单位：毫秒。
+            </summary>        
+        </member>
+        <member name="P:Oraycn.MPlayer.AudioInformation.ChannelCount">
+            <summary>
+            声道数。
+            </summary>
+        </member>
+        <member name="P:Oraycn.MPlayer.AudioInformation.SampleRate">
+            <summary>
+            采样率。
+            </summary>
+        </member>
+        <member name="P:Oraycn.MPlayer.AudioInformation.BitsNumber">
+            <summary>
+            采样位数。
+            </summary>
+        </member>
+        <member name="P:Oraycn.MPlayer.AudioInformation.AudioData">
+            <summary>
+            声音数据。
+            </summary>
+        </member>
+        <member name="P:Oraycn.MPlayer.AudioInformation.FormatTag">
+            <summary>
+            音频数据的编码方式。1-Pcm，3-Float
+            </summary>
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow">
+            <summary>
+            The interface sets properties on the video window.
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.put_Caption(System.String)">
+            <summary>
+            Sets the video window caption.
+            </summary>
+            
+            <param name="caption">Caption.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.get_Caption(System.String@)">
+            <summary>
+            Retrieves the video window caption.
+            </summary>
+            
+            <param name="caption">Caption.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.put_WindowStyle(System.Int32)">
+            <summary>
+            Sets the window style on the video window.
+            </summary>
+            
+            <param name="windowStyle">Window style flags.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.get_WindowStyle(System.Int32@)">
+            <summary>
+            Retrieves the window style on the video window.
+            </summary>
+            
+            <param name="windowStyle">Window style flags.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.put_WindowStyleEx(System.Int32)">
+            <summary>
+            Sets the extended window style on the video window.
+            </summary>
+            
+            <param name="windowStyleEx">Window extended style flags.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.get_WindowStyleEx(System.Int32@)">
+            <summary>
+            Retrieves the extended window style on the video window.
+            </summary>
+            
+            <param name="windowStyleEx">Window extended style flags.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.put_AutoShow(System.Boolean)">
+            <summary>
+            Specifies whether the video renderer automatically shows the video window when it receives video data.
+            </summary>
+            
+            <param name="autoShow">Specifies whether the video renderer automatically shows the video window.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.get_AutoShow(System.Boolean@)">
+            <summary>
+            Queries whether the video renderer automatically shows the video window when it receives video data.
+            </summary>
+            
+            <param name="autoShow">REceives window auto show flag.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.put_WindowState(System.Int32)">
+            <summary>
+            Shows, hides, minimizes, or maximizes the video window.
+            </summary>
+            
+            <param name="windowState">Window state.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.get_WindowState(System.Int32@)">
+            <summary>
+            Queries whether the video window is visible, hidden, minimized, or maximized.
+            </summary>
+            
+            <param name="windowState">Window state.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.put_BackgroundPalette(System.Boolean)">
+            <summary>
+            Specifies whether the video window realizes its palette in the background.
+            </summary>
+            
+            <param name="backgroundPalette">Value that specifies whether the video renderer realizes it palette in the background.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.get_BackgroundPalette(System.Boolean@)">
+            <summary>
+            Queries whether the video window realizes its palette in the background.
+            </summary>
+            
+            <param name="backgroundPalette">Receives state of background palette flag.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.put_Visible(System.Boolean)">
+            <summary>
+            Shows or hides the video window.
+            </summary>
+            
+            <param name="visible">Value that specifies whether to show or hide the window.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.get_Visible(System.Boolean@)">
+            <summary>
+            Queries whether the video window is visible.
+            </summary>
+            
+            <param name="visible">Visibility flag.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.put_Left(System.Int32)">
+            <summary>
+            Sets the video window's x-coordinate.
+            </summary>
+            
+            <param name="left">Specifies the x-coordinate, in pixels.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.get_Left(System.Int32@)">
+            <summary>
+            Retrieves the video window's x-coordinate.
+            </summary>
+            
+            <param name="left">x-coordinate, in pixels.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.put_Width(System.Int32)">
+            <summary>
+            Sets the width of the video window.
+            </summary>
+            
+            <param name="width">Specifies the width, in pixels.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.get_Width(System.Int32@)">
+            <summary>
+            Retrieves the width of the video window.
+            </summary>
+            
+            <param name="width">Width, in pixels.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.put_Top(System.Int32)">
+            <summary>
+            Sets the video window's y-coordinate.
+            </summary>
+            
+            <param name="top">Specifies the y-coordinate, in pixels.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.get_Top(System.Int32@)">
+            <summary>
+            Retrieves the video window's y-coordinate.
+            </summary>
+            
+            <param name="top">y-coordinate, in pixels.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.put_Height(System.Int32)">
+            <summary>
+            Sets the height of the video window.
+            </summary>
+            
+            <param name="height">Specifies the height, in pixels.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.get_Height(System.Int32@)">
+            <summary>
+            Retrieves the height of the video window.
+            </summary>
+            
+            <param name="height">Height, in pixels.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.put_Owner(System.IntPtr)">
+            <summary>
+            Specifies a parent window for the video window?
+            </summary>
+            
+            <param name="owner">Specifies a handle to the parent window.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.get_Owner(System.IntPtr@)">
+            <summary>
+            Retrieves the video window's parent window, if any?
+            </summary>
+            
+            <param name="owner">Parent window's handle.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.put_MessageDrain(System.IntPtr)">
+            <summary>
+            Specifies a window to receive mouse and keyboard messages from the video window.
+            </summary>
+            
+            <param name="drain">Specifies a handle to the window.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.get_MessageDrain(System.IntPtr@)">
+            <summary>
+            Retrieves the window that receives mouse and keyboard messages from the video window, if any.
+            </summary>
+            
+            <param name="drain">Window's handle.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.get_BorderColor(System.Int32@)">
+            <summary>
+            Retrieves the color that appears around the edges of the destination rectangle.
+            </summary>
+            
+            <param name="color">Border's color.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.put_BorderColor(System.Int32)">
+            <summary>
+            Sets the color that appears around the edges of the destination rectangle.
+            </summary>
+            
+            <param name="color">Specifies the border color.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.get_FullScreenMode(System.Boolean@)">
+            <summary>
+            Queries whether the video renderer is in full-screen mode.
+            </summary>
+            
+            <param name="fullScreenMode">Full-screen mode.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.put_FullScreenMode(System.Boolean)">
+            <summary>
+            Enables or disables full-screen mode.
+            </summary>
+            
+            <param name="fullScreenMode">Boolean value that specifies whether to enable or disable full-screen mode.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.SetWindowForeground(System.Int32)">
+            <summary>
+            Places the video window at the top of the Z order.
+            </summary>
+            
+            <param name="focus">Value that specifies whether to give the window focus.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.NotifyOwnerMessage(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)">
+            <summary>
+            Forwards a message to the video window.
+            </summary>
+            
+            <param name="hwnd">Handle to the window.</param>
+            <param name="msg">Specifies the message.</param>
+            <param name="wParam">Message parameter.</param>
+            <param name="lParam">Message parameter.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.SetWindowPosition(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Sets the position of the video window?
+            </summary>
+            
+            <param name="left">Specifies the x-coordinate, in pixels.</param>
+            <param name="top">Specifies the y-coordinate, in pixels.</param>
+            <param name="width">Specifies the width, in pixels.</param>
+            <param name="height">Specifies the height, in pixels.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.GetWindowPosition(System.Int32@,System.Int32@,System.Int32@,System.Int32@)">
+            <summary>
+            Retrieves the position of the video window.
+            </summary>
+            
+            <param name="left">x-coordinate, in pixels.</param>
+            <param name="top">y-coordinate, in pixels.</param>
+            <param name="width">Width, in pixels.</param>
+            <param name="height">Height, in pixels.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.GetMinIdealImageSize(System.Int32@,System.Int32@)">
+            <summary>
+            Retrieves the minimum ideal size for the video image.
+            </summary>
+            
+            <param name="width">Receives the minimum ideal width, in pixels.</param>
+            <param name="height">Receives the minimum ideal height, in pixels.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.GetMaxIdealImageSize(System.Int32@,System.Int32@)">
+            <summary>
+            Retrieves the maximum ideal size for the video image.
+            </summary>
+            
+            <param name="width">Receives the maximum ideal width, in pixels.</param>
+            <param name="height">Receives the maximum ideal height, in pixels.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.GetRestorePosition(System.Int32@,System.Int32@,System.Int32@,System.Int32@)">
+            <summary>
+            Retrieves the restored window position.
+            </summary>
+            
+            <param name="left">x-coordinate, in pixels.</param>
+            <param name="top">y-coordinate, in pixels.</param>
+            <param name="width">Width, in pixels.</param>
+            <param name="height">Height, in pixels.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.HideCursor(System.Boolean)">
+            <summary>
+            Hides the cursor.
+            </summary>
+            
+            <param name="hideCursor">Specifies whether to hide or display the cursor.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IVideoWindow.IsCursorHidden(System.Boolean@)">
+            <summary>
+            Queries whether the cursor is hidden.
+            </summary>
+            
+            <param name="hideCursor">Specifies if cursor is hidden or not.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.IPropertyBag">
+            <summary>
+            The <b>IPropertyBag</b> interface provides an object with a property bag in
+            which the object can persistently save its properties. 
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IPropertyBag.Read(System.String,System.Object@,System.IntPtr)">
+            <summary>
+            Read a property from property bag.
+            </summary>
+            
+            <param name="propertyName">Property name to read.</param>
+            <param name="pVar">Property value.</param>
+            <param name="pErrorLog">Caller's error log.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IPropertyBag.Write(System.String,System.Object@)">
+            <summary>
+            Write property to property bag.
+            </summary>
+            
+            <param name="propertyName">Property name to read.</param>
+            <param name="pVar">Property value.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.IEnumFilters">
+            <summary>
+            This interface is used by applications or other filters to determine
+            what filters exist in the filter graph.
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IEnumFilters.Next(System.Int32,Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter[],System.Int32@)">
+            <summary>
+            Retrieves the specified number of filters in the enumeration sequence.
+            </summary>
+            
+            <param name="cFilters">Number of filters to retrieve.</param>
+            <param name="filters">Array in which to place <see cref="T:Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter"/> interfaces.</param>
+            <param name="filtersFetched">Actual number of filters placed in the array.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IEnumFilters.Skip(System.Int32)">
+            <summary>
+            Skips a specified number of filters in the enumeration sequence.
+            </summary>
+            
+            <param name="cFilters">Number of filters to skip.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IEnumFilters.Reset">
+            <summary>
+            Resets the enumeration sequence to the beginning.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IEnumFilters.Clone(Oraycn.MPlayer.Engine.DShow.Core.IEnumFilters@)">
+            <summary>
+            Makes a copy of the enumerator with the same enumeration state.
+            </summary>
+            
+            <param name="enumFilters">Duplicate of the enumerator.</param>
+            
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.FilterInfoCollection">
+            <summary>
+            Collection of filters' information objects.
+            </summary>
+            
+            <remarks><para>The class allows to enumerate DirectShow filters of specified category. For
+            a list of categories see <see cref="T:Oraycn.MPlayer.Engine.DShow.FilterCategory"/>.</para>
+            
+            <para>Sample usage:</para>
+            <code>
+            // enumerate video devices
+            videoDevices = new FilterInfoCollection( FilterCategory.VideoInputDevice );
+            // list devices
+            foreach ( FilterInfo device in videoDevices )
+            {
+                // ...
+            }
+            </code>
+            </remarks>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.FilterInfoCollection.#ctor(System.Guid)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Oraycn.MPlayer.Engine.DShow.FilterInfoCollection"/> class.
+            </summary>
+            
+            <param name="category">Guid of DirectShow filter category. See <see cref="T:Oraycn.MPlayer.Engine.DShow.FilterCategory"/>.</param>
+            
+            <remarks>Build collection of filters' information objects for the
+            specified filter category.</remarks>
+            
+        </member>
+        <member name="P:Oraycn.MPlayer.Engine.DShow.FilterInfoCollection.Item(System.Int32)">
+            <summary>
+            Get filter information object.
+            </summary>
+            
+            <param name="index">Index of filter information object to retrieve.</param>
+            
+            <returns>Filter information object.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder">
+            <summary>
+            This interface provides methods that enable an application to build a filter graph.
+            </summary>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder.AddFilter(Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter,System.String)">
+            <summary>
+            Adds a filter to the graph and gives it a name.
+            </summary>
+            
+            <param name="filter">Filter to add to the graph.</param>
+            <param name="name">Name of the filter.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder.RemoveFilter(Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter)">
+            <summary>
+            Removes a filter from the graph.
+            </summary>
+            
+            <param name="filter">Filter to be removed from the graph.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder.EnumFilters(Oraycn.MPlayer.Engine.DShow.Core.IEnumFilters@)">
+            <summary>
+            Provides an enumerator for all filters in the graph.
+            </summary>
+            
+            <param name="enumerator">Filter enumerator.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder.FindFilterByName(System.String,Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter@)">
+            <summary>
+            Finds a filter that was added with a specified name.
+            </summary>
+            
+            <param name="name">Name of filter to search for.</param>
+            <param name="filter">Interface of found filter.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder.ConnectDirect(Oraycn.MPlayer.Engine.DShow.Core.IPin,Oraycn.MPlayer.Engine.DShow.Core.IPin,Oraycn.MPlayer.Engine.DShow.Core.AMMediaType)">
+            <summary>
+            Connects two pins directly (without intervening filters).
+            </summary>
+            
+            <param name="pinOut">Output pin.</param>
+            <param name="pinIn">Input pin.</param>
+            <param name="mediaType">Media type to use for the connection.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder.Reconnect(Oraycn.MPlayer.Engine.DShow.Core.IPin)">
+            <summary>
+            Breaks the existing pin connection and reconnects it to the same pin.
+            </summary>
+            
+            <param name="pin">Pin to disconnect and reconnect.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder.Disconnect(Oraycn.MPlayer.Engine.DShow.Core.IPin)">
+            <summary>
+            Disconnects a specified pin.
+            </summary>
+            
+            <param name="pin">Pin to disconnect.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder.SetDefaultSyncSource">
+            <summary>
+            Sets the reference clock to the default clock.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder.Connect(Oraycn.MPlayer.Engine.DShow.Core.IPin,Oraycn.MPlayer.Engine.DShow.Core.IPin)">
+            <summary>
+            Connects two pins. If they will not connect directly, this method connects them with intervening transforms.
+            </summary>
+            
+            <param name="pinOut">Output pin.</param>
+            <param name="pinIn">Input pin.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder.Render(Oraycn.MPlayer.Engine.DShow.Core.IPin)">
+            <summary>
+            Adds a chain of filters to a specified output pin to render it.
+            </summary>
+            
+            <param name="pinOut">Output pin.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder.RenderFile(System.String,System.String)">
+            <summary>
+            Builds a filter graph that renders the specified file.
+            </summary>
+            
+            <param name="file">Specifies a string that contains file name or device moniker.</param>
+            <param name="playList">Reserved.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder.AddSourceFilter(System.String,System.String,Oraycn.MPlayer.Engine.DShow.Core.IBaseFilter@)">
+            <summary>
+            Adds a source filter to the filter graph for a specific file.
+            </summary>
+            
+            <param name="fileName">Specifies the name of the file to load.</param>
+            <param name="filterName">Specifies a name for the source filter.</param>
+            <param name="filter">Variable that receives the interface of the source filter.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder.SetLogFile(System.IntPtr)">
+            <summary>
+            Sets the file for logging actions taken when attempting to perform an operation.
+            </summary>
+            
+            <param name="hFile">Handle to the log file.</param>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder.Abort">
+            <summary>
+            Requests that the graph builder return as soon as possible from its current task.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="M:Oraycn.MPlayer.Engine.DShow.Core.IGraphBuilder.ShouldOperationContinue">
+            <summary>
+            Queries whether the current operation should continue.
+            </summary>
+            
+            <returns>Return's <b>HRESULT</b> error code.</returns>
+            
+        </member>
+        <member name="T:Oraycn.MPlayer.IAudioPlayer">
+            <summary>
+            声音播放器。用于播放PCM声音数据。
+            </summary>
+        </member>
+        <member name="M:Oraycn.MPlayer.IAudioPlayer.Play(System.Byte[])">
+            <summary>
+            将声音数据放到播放队列中，进行播放。
+            </summary>
+            <param name="audioData">声音数据</param>
+        </member>
+        <member name="M:Oraycn.MPlayer.IAudioPlayer.Clear">
+            <summary>
+            清除缓冲区中尚未播放的数据。
+            </summary>
+        </member>
+    </members>
+</doc>
